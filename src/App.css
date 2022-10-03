@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+  background-color: #ceced1;
+  min-height: 100vh;
+}
+template{
+  display: block;
+}
+
+*{
+  margin: 0;
+  padding:0;
+}

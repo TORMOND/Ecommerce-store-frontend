@@ -1,0 +1,147 @@
+/* SIGNUP PAGE */
+.signupPage{
+    height: 100vh;
+    display: flex;
+      background-size: cover;
+}
+
+/* LOGIN PAGE */
+.loginPage{
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    margin: auto;
+    padding: 10px ;
+}
+
+.signup-section, .login-section{
+    background-color: purple;
+    height:calc(100% - 10%);
+    margin: auto;
+    width: 80%;
+    border-radius: 10px 50px;
+    overflow: hidden;
+    display: flex;
+    justify-content:flex-start;
+     align-items:center ; 
+}
+.nameInputs  input{
+    outline-color: purple;
+    padding: 10px 16px;
+    border-radius: 5px;
+    border:0.25px solid #ceced1;
+}
+.loginPage input{
+    width: 250px;
+    outline-color: purple;
+    padding: 10px 16px;
+    border-radius: 5px;
+    border:0.25px solid #ceced1;
+}
+.input-credentials input{
+    outline-color: purple;
+    padding: 10px 16px;
+    border-radius: 5px;
+    border:0.25px solid #ceced1;
+}
+.nameInputs{
+display:flex;
+gap: 10px;
+justify-content:center;
+}
+.input-credentials{
+    display: flex;
+    gap: 10px;
+    justify-content:center;
+}
+.login-error, .signup-error{
+    color: red;
+    padding:10px 24px;
+    border: 1px solid red;
+    box-sizing: border-box;
+    background-color: rgb(238, 196, 196);
+    margin: 0 auto;
+  }
+.submit-credentials{
+    border: none;
+    padding: 10px 24px;
+    cursor: pointer;
+    border-radius: 32px;
+    background-color: purple;
+    width: 180px;
+    color: #fff;
+    margin: auto;
+}
+.signup-form, .login-form{
+    background-color: #fff;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 10px 16px;
+}
+.user-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.user-login span{
+    color: blue;
+    cursor: pointer;
+}
+form{
+   display:flex;
+   margin:10px auto;
+   width: inherit;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.btn{
+    width:inherit;
+}
+.terms{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+@media all and (max-width:500px) {
+    .loginPage{
+        height: 100vh;
+        display: flex;
+        padding:0px;
+    }
+    
+    .signup-section, .login-section{
+        height:100vh;
+        width: 100vw;
+        border-radius:0px;
+    }
+    .nameInputs  input{
+        width:90%;
+        box-sizing: border-box;
+    }
+    .loginPage input{
+        width:90%;
+        box-sizing: border-box;
+    }
+    .input-credentials input{
+        width:90%;
+        box-sizing: border-box;
+    }
+    .nameInputs{
+    display:flex;
+    flex-direction: column;
+    }
+    
+    .input-credentials{
+        display: flex;
+        flex-direction: column;
+    }
+    .signup-form, .login-form{
+        padding: 10px 12px;
+        width: 99vw;
+        box-sizing: border-box;
+    }
+  
+}
