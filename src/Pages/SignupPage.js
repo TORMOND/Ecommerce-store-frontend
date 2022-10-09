@@ -1,13 +1,15 @@
 import '../formPages.css'
-import { useState } from "react";
+import { useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import { useSignUp } from '../Hooks/useSignup';
 
 const SignUpPage = () => {
     const[email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const[firstName, setFirstName] = useState('');
     const [secondName, setSecondName] = useState('');
-    const [error, setError] = useState(null);
+    const {signup, error, isLoading} = useSignUp();
+    
   
    const navigate = useNavigate()
    
@@ -15,8 +17,9 @@ const SignUpPage = () => {
     navigate('/LoginPage')
    }
   
-    const submit = (e)=>{
+    const submit = async(e)=>{
         e.preventDefault();
+        await signup(email, password, firstName, secondName)
     }
     return ( 
 
@@ -62,7 +65,7 @@ const SignUpPage = () => {
                 />
             </div>
             {error && <div className="signup-error">
-           Incorrect Signup Credentials
+           {error}
           </div>
             }
             
@@ -71,7 +74,7 @@ const SignUpPage = () => {
             </div>
            
             <div className='btn'>
-                <button className='submit-credentials'>Create account</button>
+                <button className='submit-credentials' disabled={isLoading}>Create account</button>
             </div>
 
         </form>       

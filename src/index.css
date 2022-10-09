@@ -147,6 +147,16 @@ template{
   color:rgb(105, 105, 214);
   outline:0.5px solid rgb(105, 105, 214) ;
 }
+.user-profile-bar{
+  width: 250px;
+  padding: 10px;
+  background-color: purple;
+  color:white;
+  position: absolute;
+  z-index: 1;
+  margin-left:80%;
+  margin-top: -40px;
+}
 
 /* CAROUSEL */
 .carousel-image{
@@ -308,7 +318,7 @@ template{
 #popups{
   width: 100%;
  background-color: rgba(0, 0, 0, 0.5);
-  display:none;
+  /* display:none; */
   position: fixed;
   z-index: 2;
   overflow-y: auto;

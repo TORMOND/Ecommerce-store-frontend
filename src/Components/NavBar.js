@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import '../index.css';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faBars, faUpDown } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 
-const NavBar = ({signInUser, categories}) => {
+const NavBar = ({signInUser, categories, userProfile}) => {
 const {search, setSearch} = useState('')
 const {cartValue , setCartValue} = useState(1)
 
@@ -52,6 +52,12 @@ const searchProduct =() =>{
           <FontAwesomeIcon icon={faUser} className='userIcon' />
             <span>Sign in</span>
           </div>
+          <div className="User" >
+          <FontAwesomeIcon icon={faUser} className='userIcon' />
+            <span>Victor</span>
+            <FontAwesomeIcon icon={faUpDown} className='userIcon' onClick={userProfile} /> 
+          </div>
+
       </div>
      </div>
      <div className="bottom-section">

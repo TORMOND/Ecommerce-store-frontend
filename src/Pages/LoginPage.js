@@ -1,20 +1,21 @@
 import '../formPages.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import {useLogin} from '../Hooks/useLogin'
 
 const LoginPage = () => {
   const navigate = useNavigate()
  
     const[email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+
+    const {login, error, isLoading} = useLogin();
     const handleSignup = ()=> {
       navigate('/SignUpPage')
      }
-    const submit = (e)=> {
-     
+    const submit = async(e)=> {
     e.preventDefault()
- 
+    await login(email, password)
     }
     const forgotPassword = ()=>{
 
@@ -45,11 +46,11 @@ const LoginPage = () => {
          onChange={(e)=> setPassword(e.target.value)}
          />
          {error &&  <div className="login-error">
-           Incorrect Login Credentials
+          {error}
           </div>
           }
          
-       <button onClick={submit} className="submit-credentials">Log in</button>
+       <button onClick={submit} className="submit-credentials" disabled={isLoading}>Log in</button>
         <span onClick={forgotPassword}>forgot Password?</span>
 
           </form>

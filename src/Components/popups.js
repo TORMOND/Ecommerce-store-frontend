@@ -1,9 +1,18 @@
 import '../index.css';
+// import { useState, useRef } from "react";
 
-const PopUps = () => {
+const PopUps = ({togglePopup}) => {
+
     return ( 
         <div id="popups">
+             <div>
+     
+   
+    </div>
 <div id="categories">
+<button onClick={togglePopup}> 
+        Toggle with setState
+      </button>
             <ul className='category-list'>
                 <li>Mobile</li>
                 <li>Desktops</li>
