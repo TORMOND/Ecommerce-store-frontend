@@ -1,7 +1,9 @@
 import './Admin.css'
-import { useReducer, useState } from 'react';
+import { useReducer, useRef, useState } from 'react';
 const AdminPage = () => {
     const {searchCustomerDetails, setSearchCustomerDetails} = useReducer('')
+    const fileInput = useRef()
+    const { inputImage, setInputImage } = useState(null)
     
     const [purchases, setPurchases] = useState([
         {id:1, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
@@ -14,20 +16,49 @@ const AdminPage = () => {
         {id:8, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
         {id:9, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false}
     ])
-const handleSearch =(searchValue)=>{
+  const handleSearch =(searchValue)=>{
    setSearchCustomerDetails(searchValue)
    purchases.filter((purchase)=>{
    return Object.values(purchase).join('').toLowerCase().includes(searchCustomerDetails.toLowerCase())
    })
    }
-
+   const pickFile =()=>{
+     fileInput.current.click()
+   }
+   const onFileSelected =(event)=>{
+    const files = event.target.files;
+    let filename = files[0].name;
+    const fileReader = new FileReader();
+    
+    console.log(files);
+    fileReader.addEventListener('load', () =>{     
+      const imageUrl = fileReader.result;
+    //   setInputImage(imageUrl)
+     console.log(imageUrl);
+      console.log(filename); 
+    })
+    
+    fileReader.readAsDataURL(files[0]);
+    const image = files[0];
+    console.log(image);
+          }
+    const sendProduct = async()=>{
+     
+    }
+        
+   
     return ( 
         <div className="AdminPage">
             <div id="wrapper">
             <div className="side-menu">
+                <input type="file" name="" id="" className='fileInput' onChange={onFileSelected} ref={fileInput} />
+                <button onClick={pickFile}>Add Image</button>
+
                 <ul className='menu-list'>
+
                     <li>Dashboard</li>
                     <li>Messages</li>
+                    <li>Analytics</li>
                     <li>Settings</li>
                     <li>Logout</li>
                 </ul>
@@ -53,10 +84,16 @@ const handleSearch =(searchValue)=>{
 
                 </div>
             
-
                 
             </div>
-
+           <div className="stage-check-selection">
+           <div className='more-headers'>
+                            <h3>All</h3>
+                            <h3>Dispatched</h3>
+                            <h3>Delivered</h3>
+                            <h3>Returned</h3>
+                        </div>
+           </div>
             <div className="customer-purchases" >
                     <div className="headers">
                         <h3>Customer's Name</h3>
@@ -70,7 +107,7 @@ const handleSearch =(searchValue)=>{
                     </div>
                     {purchases && purchases.map((purchase, key)=>(
                     <div className="customer-purchase-information" key={purchase.id}>
-                        <p>{purchase.id}.</p>
+                    
                         <div className="customer-name">{purchase.name}</div>
                         <div className="other-purchase-details">
                         <div className="product-bought">{purchase.item}</div>
@@ -83,6 +120,9 @@ const handleSearch =(searchValue)=>{
                     </div>
                              ))}
                 </div>
+
+                {/* { <img src="" alt={inputImage} />} */}
+      
         </div>
             </div>
            

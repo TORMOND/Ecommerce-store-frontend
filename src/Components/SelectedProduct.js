@@ -7,7 +7,7 @@ import { faStar, faStarHalfStroke, faCartShopping } from '@fortawesome/free-soli
 
 // import { faUser } from '@fortawesome/free-regular-svg-icons';
 
-const SelectedProduct = () => {
+const SelectedProduct = ({initiatePayment}) => {
   const id = localStorage.getItem('id')
 
    const {data:product, isPending, error} = useFetch('http://localhost:4000/api/products/' + id)
@@ -117,7 +117,7 @@ const SelectedProduct = () => {
 
 <div className="btns">
     <button onClick={addToCart}><FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />Add to Cart</button>
-    <button >Buy Now</button>
+    <button onClick={initiatePayment}>Buy Now</button>
 </div>
 </div>
   </div>

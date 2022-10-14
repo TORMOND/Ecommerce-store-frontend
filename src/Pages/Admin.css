@@ -1,7 +1,7 @@
 :root{
---bg-color:"#ceced1";
---primary-color:"purple";
---secondary-color:"#fff";
+--bg-color:#ceced1;
+--primary-color:purple;
+--secondary-color:#fff;
 }
 .Admin-Page{
     width: 100vw;
@@ -61,4 +61,29 @@
 .other-purchase-details{
     display: flex;
     gap: 10px;
+}
+.search-bar{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-bar input{
+    padding: 5px 10px;
+    width: 70%;
+}
+.search-bar input:focus{
+    outline: none;
+}
+.search-bar button{
+    width: 18%;
+    padding: 7px 10px;
+    border: none;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+}
+.fileInput{
+    display: none;
 }

@@ -7,7 +7,7 @@ const PopUps = ({togglePopup}) => {
         <div id="popups">
              <div>
      
-   
+    
     </div>
 <div id="categories">
 <button onClick={togglePopup}> 
