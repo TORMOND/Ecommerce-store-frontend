@@ -1,7 +1,8 @@
 import '../index.css';
-// import { useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 const PopUps = ({togglePopup}) => {
+    const categories = useRef();
 
     return ( 
         <div id="popups">
@@ -9,11 +10,11 @@ const PopUps = ({togglePopup}) => {
      
     
     </div>
-<div id="categories">
+<div id="categories" >
 <button onClick={togglePopup}> 
         Toggle with setState
       </button>
-            <ul className='category-list'>
+            <ul className='category-list' ref={categories}>
                 <li>Mobile</li>
                 <li>Desktops</li>
                 <li>Monitors</li>

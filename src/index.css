@@ -326,6 +326,7 @@ template{
   z-index: 2;
   overflow-y: auto;
   height: 100vh;
+  display: flex;
 }
 #modal{
   width: 100%;
@@ -586,6 +587,9 @@ template{
   transition: width 1s;
 }
 
+
+
+
 @media all and (max-width:1024px) {
   .new-Arrivals, .top-sellers, .deals, .Load{
     display: grid;
@@ -620,14 +624,6 @@ template{
   visibility: visible;
 }
 }
-
-
-
-
-
-
-
-
 
 
 

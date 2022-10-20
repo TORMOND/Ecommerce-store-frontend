@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../index.css';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +8,9 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 const NavBar = ({signInUser, categories, userProfile}) => {
 const {search, setSearch} = useState('')
-const {cartValue , setCartValue} = useReducer(1)
+const [cart , setCart] = useState(0)
+const  cartValue =useRef()
+// console.log(cartValue.current.value)
 
 useEffect(()=>{
   
@@ -45,7 +47,7 @@ const searchProduct =() =>{
           <FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />
           <span>Cart</span>
           <div className="number">
-        <h6>{cartValue}0</h6>
+        <h6 ref={cartValue}>{cart}</h6>
         </div>
           </div>
           <div className="User" onClick={signInUser}>

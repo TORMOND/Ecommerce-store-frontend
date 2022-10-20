@@ -5,7 +5,7 @@
 }
 .Admin-Page{
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     box-sizing: border-box;
 }
 #wrapper{
@@ -16,18 +16,11 @@
 }
 .side-menu{
     min-height: 100vh;
-    width: 20%;
-    padding:20px 10px;
+    width: 22%;
     box-sizing: border-box;
 }
-.menu-list{
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    gap: 10px;
-}
 #container{
-    width:80%;
+    width:78%;
     min-height: 100vh;
     padding:20px 10px;
     box-sizing: border-box;
@@ -86,4 +79,165 @@
 }
 .fileInput{
     display: none;
+}
+
+/* SIDE-BAR */
+
+.side-bar{
+    padding: 20px 16px;
+    height: 100vh;
+    box-sizing: border-box;
+    width:inherit;
+    box-shadow:  rgba(255, 255, 255, 0.5) 3px 3px 6px 1px inset, rgb(204, 219, 232) -3px -3px 6px 0px inset;
+  }
+  .sideBar-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 20px 0;
+    padding: 0;
+    height: 70%;
+  }
+  .sideBar-list li{
+    list-style: none;
+    display: inline-flex;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    gap:10px;
+    align-items: center;
+  }
+  .Logout{
+    list-style: none;
+    display: inline-flex;
+    padding: 10px;   
+    font-weight: 600;
+    cursor: pointer;
+    gap:10px;
+    align-items: center;
+    
+  }
+
+  .sideBar-list li:hover{
+    color: var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: 0.5s;
+  }
+   .Logout:hover{
+    color: var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: 0.5s;
+}
+  .Dashboard:hover{
+    color: var(--primary-color);
+  }
+  .Dashboard, .calender:hover{
+    color: var(--primary-color);
+  }
+  .Dashboard, .calender{
+    text-decoration: none;
+    display: flex;
+    gap:10px;
+    align-items: center;
+  }
+  .create-tab{
+    background-color: rgb(195, 88, 228);
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0;
+    cursor: pointer;
+  }
+  .calender, .Dashboard, .settings, .Logout{
+    text-decoration: none;
+    display: inline-flex;
+    color:black;
+    display: flex;
+    gap: 10px;
+  }
+  .create-tab li{
+     color:#fff;
+  }
+  
+  
+  
+
+
+
+
+  .onPicLoad{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px ;
+    background-color: var(--bg-color);
+    margin: auto;
+}
+.top-part{
+  display: flex;
+  justify-content: flex-end;
+
+}
+.top-part button{
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+.onPicLoad input{
+   padding: 10px 20px;
+   width: calc(100% - 10%);
+ margin: 0 auto;
+ border-radius: 5px;
+border: 0.5px solid #bfc0c2;
+}
+.onPicLoad input:focus{
+outline-color: #1b74E4;
+}
+.onPicLoad img{
+    width:100%;
+    height:inherit;
+    margin: auto;
+    margin-top: 20px;
+}
+.onPicLoad p{
+    color:#65676b;
+}
+.manouver-btns{
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+    justify-content: flex-end;
+    border-top:0.5px solid #e5e6e7 ;
+}
+.manouver-btns button:first-child{
+    border: none;
+    background: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 10px 30px;
+}
+.manouver-btns button:first-child:hover{
+    background: #f6f8fa;
+}
+.manouver-btns button:last-child{
+    border: none;
+   color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    background: #1b74E4;
+    border-radius: 5px;
+    padding: 10px 30px;
 }

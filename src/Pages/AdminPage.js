@@ -1,28 +1,28 @@
 import './Admin.css'
-import { useReducer, useRef, useState } from 'react';
+import {  useRef, useState } from 'react';
+import SideBar from '../Components/sidebar';
+// import PopUps from '../Components/popups';
+import AddProduct from '../Components/AddProduct';
 const AdminPage = () => {
-    const {searchCustomerDetails, setSearchCustomerDetails} = useReducer('')
+    const [searchCustomerDetails, setSearchCustomerDetails] = useState('')
     const fileInput = useRef()
-    const { inputImage, setInputImage } = useState(null)
+    const [show, setShow] = useState(false);
+    const popup =useRef()
+    // const { inputImage, setInputImage } = useState(null)
     
     const [purchases, setPurchases] = useState([
         {id:1, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
         {id:2, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
         {id:3, name:"Jane Njeri", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
-        {id:4, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
-        {id:5, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
-        {id:6, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
-        {id:7, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
-        {id:8, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
+        {id:4, name:"John Doe", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
+        {id:5, name:"Aisha Hamisi", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
+        {id:6, name:"Ann", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
+        {id:7, name:"Maureen", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
+        {id:8, name:"Victor Monderu", item:"iPhone 13",price: 1099 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
         {id:9, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false}
     ])
-  const handleSearch =(searchValue)=>{
-   setSearchCustomerDetails(searchValue)
-   purchases.filter((purchase)=>{
-   return Object.values(purchase).join('').toLowerCase().includes(searchCustomerDetails.toLowerCase())
-   })
-   }
-   const pickFile =()=>{
+  
+   const createProject =()=>{
      fileInput.current.click()
    }
    const onFileSelected =(event)=>{
@@ -36,6 +36,8 @@ const AdminPage = () => {
     //   setInputImage(imageUrl)
      console.log(imageUrl);
       console.log(filename); 
+      localStorage.setItem('selectedImage', imageUrl)
+      setShow(true)
     })
     
     fileReader.readAsDataURL(files[0]);
@@ -45,23 +47,25 @@ const AdminPage = () => {
     const sendProduct = async()=>{
      
     }
+    const handleSearch = purchases.filter(purchase=>   
+        Object.values(purchase).join('').toLowerCase().trim().includes(searchCustomerDetails)
+        )
         
-   
+    const purchasesToDisplay = searchCustomerDetails ? handleSearch : purchases;  
+
+    const closePopup = ()=>{
+        setShow(false)
+        localStorage.removeItem('selectedImage')
+    }
     return ( 
         <div className="AdminPage">
+            {show &&<div id="popups" ref={popup}>
+                <AddProduct closePopoup={closePopup} />
+            </div>
+            }
             <div id="wrapper">
             <div className="side-menu">
-                <input type="file" name="" id="" className='fileInput' onChange={onFileSelected} ref={fileInput} />
-                <button onClick={pickFile}>Add Image</button>
-
-                <ul className='menu-list'>
-
-                    <li>Dashboard</li>
-                    <li>Messages</li>
-                    <li>Analytics</li>
-                    <li>Settings</li>
-                    <li>Logout</li>
-                </ul>
+                <SideBar onFileSelected={onFileSelected} createProject={createProject} fileInput={fileInput} />
             </div>
         <div id="container">
             <div className="nav-bar">
@@ -73,7 +77,7 @@ const AdminPage = () => {
                         type="text"
                         value={searchCustomerDetails}
                         placeholder='search'
-                        onChange={(e)=>setSearchCustomerDetails(e.target.value)}
+                        onChange={e=>setSearchCustomerDetails(e.target.value.toLocaleLowerCase())}
                         />
                         <button onClick={handleSearch}>Search</button>
                     </div>
@@ -105,7 +109,7 @@ const AdminPage = () => {
                             <h3>Returned</h3>
                         </div>
                     </div>
-                    {purchases && purchases.map((purchase, key)=>(
+                    {purchasesToDisplay && purchasesToDisplay.map((purchase, key)=>(
                     <div className="customer-purchase-information" key={purchase.id}>
                     
                         <div className="customer-name">{purchase.name}</div>

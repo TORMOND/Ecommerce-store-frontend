@@ -1,3 +1,4 @@
+import './loading.css';
 
 const LoadingSection = () => {
     return ( 
