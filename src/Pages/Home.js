@@ -4,6 +4,7 @@ import Products from '../Components/Products';
 import Footer from '../Components/footer';
 
 
+
 import {useNavigate} from 'react-router-dom';
 import PopUps from '../Components/popups';
 import React, { useState, useRef } from 'react';
@@ -12,6 +13,7 @@ import { useLogout } from '../Hooks/useLogout';
 const Home = () => {     
    const navigate = useNavigate()
 
+   
   const [userBar, setUserBar] = useState(false)
   const {popups, setPopups} = useState(true)
   // const popup = useRef()
@@ -32,13 +34,26 @@ const userProfile = () =>{
 const togglePopup =()=>{
 setShow(!show);
 }
+const handleBrands =()=>{
+  setShow(!show);
+}
+const handleOffers=()=>{
+  setShow(!show);
+}
+const handleContacts=()=>{
+  setShow(!show);
+}
 
     return ( 
         <div className="Home">
 
-   { show && <PopUps ref={ref} id={popups ? "popups" : "modal"} togglePopup={togglePopup} />}
+   { show && <div id='popups' ref={ref}>
+   
+   <PopUps ref={ref} id={popups ? "popups" : "modal"} togglePopup={togglePopup} />
 
-<NavBar signInUser={signInUser}  categories={togglePopup} userProfile={userProfile} />
+    </div>}
+
+<NavBar signInUser={signInUser}  categories={togglePopup} userProfile={userProfile} handleBrands={handleBrands} handleContacts={handleContacts} handleOffers={handleOffers} />
 {userBar && <div className="user-profile-bar" ref={userProfileBar}>
   <p></p>
   <p className='checkProfile'>PROFILE</p>
@@ -47,6 +62,7 @@ setShow(!show);
 }
 
 <Products />
+
 <Footer />
         </div>
      );

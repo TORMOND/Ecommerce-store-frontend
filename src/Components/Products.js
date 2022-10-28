@@ -8,6 +8,7 @@ import Loading from './Loading';
 // import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 import { useNavigate } from 'react-router-dom';
+import LoadingSection from './LoadingSection';
 const Products = () => {
    
      const {data:products, isPending, error} = useFetch('http://localhost:4000/api/products/')
@@ -22,35 +23,23 @@ const Products = () => {
     return ( 
         <>
         <div className="products-section">
-            <div className="selections">
-           <h3>Mobile Devices</h3>     
-            </div>
-        
-           
-               {isPending && 
-               <div className='Load'>
-                  <Loading />
-                  <Loading />
-                  <Loading />
-                  <Loading />
-               </div>
-    
+               {isPending &&              
+         <LoadingSection />        
                   }
                {error &&       
-              <div className='Load'>
-              <Loading />
-              <Loading />
-              <Loading />
-              <Loading />
-           </div>
+             <LoadingSection />
                }
+
+<div className="selections">
+           <h3>Mobile Devices</h3>     
+            </div>
  <div className="new-Arrivals">
                {products && products.filter((product)=>product.device ==="mobile").map((product)=> (
                   <div className="product"  key={product._id} onClick={event=>selectProduct(event, product._id)}>
                    
 
                   <div className="product-image">
-                   <img src={product.img} alt={product.img} />  
+                   <img src={product.img} alt={product.title} />  
                   </div> 
                   <div className="product-infor">
                   <p>{product.title}</p>
@@ -80,18 +69,7 @@ const Products = () => {
            <h3>PCs</h3>  
             </div>
 
-            {isPending &&  <div className='Load'>
-                  <Loading />
-                  <Loading />
-                  <Loading />
-                  <Loading />
-               </div>}
-               {error &&   <div className='Load'>
-                  <Loading />
-                  <Loading />
-                  <Loading />
-                  <Loading />
-               </div>}
+            
  
             <div className="top-sellers">
             {products && products.filter((product)=> product.device ==="PC").map((product)=> (
@@ -128,18 +106,7 @@ const Products = () => {
             <div className="selections">
            <h3>Deal of The Day</h3>     
             </div>
-            {isPending &&  <div className='Load'>
-                  <Loading />
-                  <Loading />
-                  <Loading />
-                  <Loading />
-               </div>}
-               {error &&   <div className='Load'>
-                  <Loading />
-                  <Loading />
-                  <Loading />
-                  <Loading />
-               </div>}
+           
  
             <div className="deals">
                {products && products.filter((product)=>product.device ==="mobile").map((product)=> (

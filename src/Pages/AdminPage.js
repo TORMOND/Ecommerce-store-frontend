@@ -25,6 +25,8 @@ const AdminPage = () => {
    const createProject =()=>{
      fileInput.current.click()
    }
+
+
    const onFileSelected =(event)=>{
     const files = event.target.files;
     let filename = files[0].name;
@@ -44,9 +46,8 @@ const AdminPage = () => {
     const image = files[0];
     console.log(image);
           }
-    const sendProduct = async()=>{
-     
-    }
+
+    
     const handleSearch = purchases.filter(purchase=>   
         Object.values(purchase).join('').toLowerCase().trim().includes(searchCustomerDetails)
         )
@@ -60,7 +61,8 @@ const AdminPage = () => {
     return ( 
         <div className="AdminPage">
             {show &&<div id="popups" ref={popup}>
-                <AddProduct closePopoup={closePopup} />
+                <AddProduct closePopoup={closePopup} 
+                />
             </div>
             }
             <div id="wrapper">
@@ -125,7 +127,6 @@ const AdminPage = () => {
                              ))}
                 </div>
 
-                {/* { <img src="" alt={inputImage} />} */}
       
         </div>
             </div>

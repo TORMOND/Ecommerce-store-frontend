@@ -84,7 +84,7 @@ const SelectedProduct = ({initiatePayment}) => {
  <div className="selected-product">
       
 <div className="selected-product-image">
-<img src={product.img} alt={product.img} className='item-image' />
+<img src={product.img} alt={product.title} className='item-image' />
 </div>
 <div className="product-infor">
 <h2 className='product-title'>{product.title}</h2>

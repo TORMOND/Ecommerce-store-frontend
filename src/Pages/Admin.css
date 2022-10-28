@@ -179,7 +179,6 @@
 .top-part{
   display: flex;
   justify-content: flex-end;
-
 }
 .top-part button{
   border: none;

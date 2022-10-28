@@ -6,7 +6,7 @@ import { faCartShopping, faBars, faCaretDown } from '@fortawesome/free-solid-svg
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 
-const NavBar = ({signInUser, categories, userProfile}) => {
+const NavBar = ({signInUser, categories, userProfile, handleBrands, handleContacts, handleOffers}) => {
 const {search, setSearch} = useState('')
 const [cart , setCart] = useState(0)
 const  cartValue =useRef()
@@ -69,10 +69,10 @@ const searchProduct =() =>{
           <FontAwesomeIcon icon={faBars} />
           <p>All Categories</p>
           </li>
-         <li className='brands'>Brands</li>
-         <li className='contacts'>Contact Us</li>
-         <li className='sell'>Sell</li>
-         <li className='offers'>Offers</li>
+         <li className='brands' onClick={handleBrands}>Brands</li>
+         <li className='contacts' onClick={handleContacts}>Contact Us</li>
+         <li className='sell'>Filter</li>
+         <li className='offers' onClick={handleOffers}>Offers</li>
       </ul>
      </div>
      </div>
