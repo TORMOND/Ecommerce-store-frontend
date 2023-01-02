@@ -1,6 +1,6 @@
 import '../index.css';
 import useFetch from '../UseFetch'
-
+import { useState } from 'react';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfStroke, faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -11,10 +11,26 @@ const SelectedProduct = ({initiatePayment}) => {
   const id = localStorage.getItem('id')
 
    const {data:product, isPending, error} = useFetch('http://localhost:4000/api/products/' + id)
-   const addToCart =()=>{
-     localStorage.setItem(product.title, id)
 
-     alert('Added to cart')
+   const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || []);
+
+  
+  
+//   function handleUpdateItem(item, index) {
+//     const updatedItems = [...items];
+//     updatedItems[index] = item;
+//     setItems(updatedItems);
+//     localStorage.setItem('items', JSON.stringify(updatedItems));
+//   }
+   
+   const addToCart =(event, id)=>{
+
+    const updatedItems = [...items];
+        updatedItems.push(id)
+        setItems(updatedItems);
+        localStorage.setItem('items', JSON.stringify(updatedItems));
+        console.log(event);
+    //  alert('Added to cart')
    }
  
     return ( 
@@ -116,7 +132,7 @@ const SelectedProduct = ({initiatePayment}) => {
 <p className='delivery-period'>Delivery: September 7 - 10</p>
 
 <div className="btns">
-    <button onClick={addToCart}><FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />Add to Cart</button>
+    <button onClick={event=>addToCart(event ,product._id)}><FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />Add to Cart</button>
     <button onClick={initiatePayment}>Buy Now</button>
 </div>
 </div>

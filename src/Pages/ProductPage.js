@@ -70,7 +70,7 @@ const ProductPage = () => {
 
         <NavBar signInUser={signInUser}  categories={categories} />
         <div className="AD-section">
-          <p>{id}</p>
+          {/* <p>{id}</p> */}
         </div>
         <SelectedProduct initiatePayment={initiatePayment}/>
 

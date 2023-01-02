@@ -47,3 +47,30 @@ export default SearchExample;
 // ]
 
 
+// ADDING ITEMS TO CART
+// import React, { useState } from 'react';
+
+// function App() {
+//   const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || []);
+
+//   function handleUpdateItem(item, index) {
+//     const updatedItems = [...items];
+//     updatedItems[index] = item;
+//     setItems(updatedItems);
+//     localStorage.setItem('items', JSON.stringify(updatedItems));
+//   }
+
+//   return (
+//     <div>
+//       <ul>
+//         {items.map((item, index) => (
+//           <li key={index}>
+//             {item}
+//             <button onClick={() => handleUpdateItem('updated item', index)}>Update</button>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+

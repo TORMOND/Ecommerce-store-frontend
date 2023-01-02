@@ -1,19 +1,19 @@
 import '../index.css';
+
+import { useNavigate } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { useLogout } from '../Hooks/useLogout';
+
+
 import NavBar from '../Components/NavBar';
 import Products from '../Components/Products';
 import Footer from '../Components/footer';
-
-
-
-import {useNavigate} from 'react-router-dom';
 import PopUps from '../Components/popups';
-import React, { useState, useRef } from 'react';
-import { useLogout } from '../Hooks/useLogout';
+
 
 const Home = () => {     
    const navigate = useNavigate()
 
-   
   const [userBar, setUserBar] = useState(false)
   const {popups, setPopups} = useState(true)
   // const popup = useRef()

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import '../index.css';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,13 +8,11 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 const NavBar = ({signInUser, categories, userProfile, handleBrands, handleContacts, handleOffers}) => {
 const {search, setSearch} = useState('')
-const [cart , setCart] = useState(0)
+const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || []);
+const [cart , setCart] = useState(items.length)
 const  cartValue =useRef()
-// console.log(cartValue.current.value)
 
-useEffect(()=>{
-  
-})
+
 
 const searchProduct =() =>{
 
@@ -23,9 +21,44 @@ const searchProduct =() =>{
    <div className="nav-bar">
     <div className="mobile-nav">
       <div className="menu-section">
-      <h2>STORE</h2>  
-      <div className="side-menu">
+<div className="top-section">
+   <h2>STORE</h2> 
+   <div className="cart">
+          <FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />
+          <div className="number">
+        <h6 ref={cartValue}>{cart}</h6>
+        </div>
+          </div>
+          <div className="User" onClick={signInUser}>
+          <FontAwesomeIcon icon={faUser} className='userIcon' />
+            <span>Sign in</span>
+          </div>
+          {/* <div className="User" >
+          <FontAwesomeIcon icon={faUser} className='userIcon' />
+            <span>Victor</span>
+            <FontAwesomeIcon icon={faCaretDown}  className='userIcon' onClick={userProfile}   />
+       
+          </div> */}
+   <div className="side-menu">
       <FontAwesomeIcon icon={faBars} />
+      </div>
+
+</div>  
+     <div className="second-part">
+     <div className="input-part">
+         <input
+          type="text" 
+         placeholder='search Product'
+         value={search}
+         onChange={e=> setSearch(e.target.value)}
+          />
+         
+      </div> 
+         
+
+      </div>
+      <div className="bottom-section">
+       
       </div>
       </div>
     </div>

@@ -17,7 +17,6 @@ const AddProduct = ({closePopoup }) => {
      const rating = 0;
      const popularity = 0;
 
-
      const img = localStorage.getItem('selectedImage')
      const product_details = {img, title, brands, device, price, color, details, rating, popularity}
 
@@ -38,6 +37,7 @@ const AddProduct = ({closePopoup }) => {
         console.log(error.message)
         // setError(true)
       })
+    
     }
 
     return (      
