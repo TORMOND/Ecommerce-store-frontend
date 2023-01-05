@@ -14,15 +14,6 @@ const SelectedProduct = ({initiatePayment}) => {
 
    const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || []);
 
-  
-  
-//   function handleUpdateItem(item, index) {
-//     const updatedItems = [...items];
-//     updatedItems[index] = item;
-//     setItems(updatedItems);
-//     localStorage.setItem('items', JSON.stringify(updatedItems));
-//   }
-   
    const addToCart =(event, id)=>{
 
     const updatedItems = [...items];
@@ -30,7 +21,7 @@ const SelectedProduct = ({initiatePayment}) => {
         setItems(updatedItems);
         localStorage.setItem('items', JSON.stringify(updatedItems));
         console.log(event);
-    //  alert('Added to cart')
+     alert('Added to cart')
    }
  
     return ( 
@@ -129,7 +120,7 @@ const SelectedProduct = ({initiatePayment}) => {
 <h3 className='product-price'>${product.price}</h3>
 <p className='extra-fees'>${product.price * 0.17} Shipping & Import Fees Deposit to Kenya <span className='extra-details'> Details</span> </p>
 
-<p className='delivery-period'>Delivery: September 7 - 10</p>
+<p className='delivery-period'>Delivery: February 7 - 10</p>
 
 <div className="btns">
     <button onClick={event=>addToCart(event ,product._id)}><FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />Add to Cart</button>

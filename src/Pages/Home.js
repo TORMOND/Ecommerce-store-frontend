@@ -9,6 +9,7 @@ import NavBar from '../Components/NavBar';
 import Products from '../Components/Products';
 import Footer from '../Components/footer';
 import PopUps from '../Components/popups';
+import Brands from '../Components/Brands';
 
 
 const Home = () => {     
@@ -21,6 +22,7 @@ const Home = () => {
   const { logout } = useLogout()
   const [show, setShow] = useState(false);
   const ref = useRef(null);
+  const brands_ref = useRef(null)
 
 const signInUser =()=>{
   navigate('/LoginPage')
@@ -43,17 +45,22 @@ const handleOffers=()=>{
 const handleContacts=()=>{
   setShow(!show);
 }
-
+const cartPage =()=>{
+  navigate('/cart')
+}
     return ( 
         <div className="Home">
 
    { show && <div id='popups' ref={ref}>
    
    <PopUps ref={ref} id={popups ? "popups" : "modal"} togglePopup={togglePopup} />
-
+   
     </div>}
 
-<NavBar signInUser={signInUser}  categories={togglePopup} userProfile={userProfile} handleBrands={handleBrands} handleContacts={handleContacts} handleOffers={handleOffers} />
+    {/* <Brands togglePopup={togglePopup} togglePopup={togglePopup} /> */}
+
+
+<NavBar signInUser={signInUser}  categories={togglePopup} userProfile={userProfile} handleBrands={handleBrands} handleContacts={handleContacts} handleOffers={handleOffers} cartPage={cartPage} />
 {userBar && <div className="user-profile-bar" ref={userProfileBar}>
   <p></p>
   <p className='checkProfile'>PROFILE</p>

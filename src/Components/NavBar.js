@@ -6,12 +6,11 @@ import { faCartShopping, faBars, faCaretDown } from '@fortawesome/free-solid-svg
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 
-const NavBar = ({signInUser, categories, userProfile, handleBrands, handleContacts, handleOffers}) => {
+const NavBar = ({signInUser, categories, userProfile, handleBrands, handleContacts, handleOffers, cartPage}) => {
 const {search, setSearch} = useState('')
 const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || []);
 const [cart , setCart] = useState(items.length)
 const  cartValue =useRef()
-
 
 
 const searchProduct =() =>{
@@ -76,7 +75,7 @@ const searchProduct =() =>{
       </div>
   
       <div className="second-part">
-          <div className="cart">
+          <div className="cart" onClick={cartPage}>
           <FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />
           <span>Cart</span>
           <div className="number">
