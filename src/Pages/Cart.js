@@ -29,7 +29,7 @@ const Cart = () => {
       const categories=()=>{
         
       }
-      const removeCartItem = (index)=>{
+  const removeCartItem = (index)=>{
     const updatedItems = [...items];
     updatedItems.splice(index, 1);
     console.log(updatedItems)

@@ -322,6 +322,25 @@ template{
   align-items: center;
 }
 /* POPUPS */
+.close-popup{
+  border:0.5px solid #ceced1;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+  color:#fff;
+  background-color:purple;
+  transition: 0.7s;
+}
+.close-popup:hover{
+  background-color:#ceced1;
+ color:purple;
+}
 #popups{
   width: 100%;
  background-color: rgba(0, 0, 0, 0.5);
@@ -344,9 +363,9 @@ template{
 #categories{
   background-color: #fff;
   overflow-y: auto;
-  height: 87.5vh;
-  width: 25vw;
-  margin-top: 12.5vh;
+  height:100vh;
+  width: 22.5vw;
+  margin-top:0vh;
 }
 .category-list{
   display: flex;
@@ -357,8 +376,30 @@ template{
 .category-list li{
   display: inline-flex;
   cursor: pointer;
-  
+  gap:10px;
+  padding:  5px;
 }
+.close-section{
+  display:flex;
+  background-color: purple;
+  justify-content: flex-end;
+  padding: 5px ;
+}
+#brands{
+  background-color: #fff;
+  overflow-y: auto;
+  height:100vh;
+  width: 22.5vw;
+  margin-top: 0;
+}
+#contacts{
+  background-color: #fff;
+  overflow-y: auto;
+  height: 37.5vh;
+  width: 35vw;
+  margin-top: 0vh;
+}
+
 /* SELECTED PRODUCT */
 .selected-product{
   display: flex;

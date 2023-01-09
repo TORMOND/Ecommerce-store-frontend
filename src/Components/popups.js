@@ -1,6 +1,13 @@
 import '../index.css';
 import { useState, useRef } from "react";
 
+// FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faMobile, faDesktop, faGamepad,faComputer,  faTv } from '@fortawesome/free-solid-svg-icons';
+import Loading from './Loading';
+// import { faUser } from '@fortawesome/free-regular-svg-icons';
+
+
 const PopUps = ({togglePopup}) => {
     const categories = useRef();
 
@@ -11,28 +18,34 @@ const PopUps = ({togglePopup}) => {
     
     </div>
 <div id="categories" >
-<button onClick={togglePopup}> 
-        Toggle with setState
-      </button>
+    <div className="close-section">
+     <button onClick={togglePopup} className='close-popup'> X</button>   
+    </div>
+
             <ul className='category-list' ref={categories}>
-                <li>Mobile</li>
-                <li>Desktops</li>
-                <li>Monitors</li>
-                <li>Computers</li>
-                <li>Gaming</li>
+                <li>
+                <FontAwesomeIcon icon={faMobile} />
+                   <p>Mobile</p></li>
+                <li>
+                <FontAwesomeIcon icon={faDesktop} />
+                <p>  Desktops</p>
+                  </li>
+                <li><FontAwesomeIcon icon={faTv} />
+                <p>Monitors</p>
+                </li>
+                <li><FontAwesomeIcon icon={faComputer} />
+                <p> Computers</p>
+               </li>
+                <li><FontAwesomeIcon icon={faGamepad} />
+                <p>Gaming</p>
+                </li>
                 <li>Accesories</li>
-                <li>Software</li>
-                <li>Other Products & Services</li>
+                {/* <li><FontAwesomeIcon icon={faUncharted} />Software</li>
+                <li><FontAwesomeIcon icon={faUncharted} />Other Products & Services</li> */}
             </ul>
 
         </div>
 
-        <div id="brands">
-
-        </div>
-        <div id="contact">
-            
-        </div>
 
         </div>
      );

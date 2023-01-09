@@ -7,13 +7,12 @@ const Brands = ({togglePopup}) => {
     return ( 
         <div id="popups">
              <div>
-     
-    
     </div>
 <div id="brands" >
-<button onClick={togglePopup}> 
-        Toggle with setState
-      </button>
+    <div className="close-section">
+        <button onClick={togglePopup}  className='close-popup'>  X </button>
+    </div>
+
             <ul className='category-list' ref={categories}>
                 <li>iPhones</li>
                 <li>Samsung</li>
@@ -25,13 +24,7 @@ const Brands = ({togglePopup}) => {
 
         </div>
 
-        <div id="brands">
-
-        </div>
-        <div id="contact">
-            
-        </div>
-
+     
         </div>
      );
 }

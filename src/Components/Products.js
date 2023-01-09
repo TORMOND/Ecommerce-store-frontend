@@ -35,6 +35,7 @@ const Products = () => {
             </div>
  <div className="new-Arrivals">
                {products && products.filter((product)=>product.device ==="mobile").map((product)=> (
+                  
                   <div className="product"  key={product._id} onClick={event=>selectProduct(event, product._id)}>
                    
 

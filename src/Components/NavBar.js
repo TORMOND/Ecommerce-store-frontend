@@ -103,7 +103,6 @@ const searchProduct =() =>{
           </li>
          <li className='brands' onClick={handleBrands}>Brands</li>
          <li className='contacts' onClick={handleContacts}>Contact Us</li>
-         <li className='sell'>Filter</li>
          <li className='offers' onClick={handleOffers}>Offers</li>
       </ul>
      </div>

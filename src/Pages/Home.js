@@ -10,6 +10,7 @@ import Products from '../Components/Products';
 import Footer from '../Components/footer';
 import PopUps from '../Components/popups';
 import Brands from '../Components/Brands';
+import Contacts from '../Components/Contacts';
 
 
 const Home = () => {     
@@ -21,8 +22,11 @@ const Home = () => {
   const userProfileBar =useRef(null)
   const { logout } = useLogout()
   const [show, setShow] = useState(false);
+  const [brands, setBrands] = useState(false);
+  const [contacts, setContacts] = useState(false);
   const ref = useRef(null);
   const brands_ref = useRef(null)
+  const contacts_ref = useRef(null)
 
 const signInUser =()=>{
   navigate('/LoginPage')
@@ -33,17 +37,23 @@ const handleLogout =()=>{
 const userProfile = () =>{
   setUserBar(!userBar)
 }
-const togglePopup =()=>{
-setShow(!show);
+const handleCategories =()=>{
+  setShow(!show)
 }
+const togglePopup =()=>{
+setShow(null);
+setBrands(null)
+setContacts(null)
+}
+
 const handleBrands =()=>{
-  setShow(!show);
+  setBrands(!brands);
 }
 const handleOffers=()=>{
   setShow(!show);
 }
 const handleContacts=()=>{
-  setShow(!show);
+  setContacts(!contacts);
 }
 const cartPage =()=>{
   navigate('/cart')
@@ -53,14 +63,23 @@ const cartPage =()=>{
 
    { show && <div id='popups' ref={ref}>
    
-   <PopUps ref={ref} id={popups ? "popups" : "modal"} togglePopup={togglePopup} />
-   
+   <PopUps ref={ref}  togglePopup={togglePopup} />
+
+    </div>}
+    { brands && <div id='popups' ref={ref}>
+ 
+   <Brands ref={brands_ref} togglePopup={togglePopup}  />
+
+    </div>}
+    { contacts && <div id='popups' ref={ref}>
+
+   <Contacts ref={contacts_ref} togglePopup={togglePopup}  />
+
     </div>}
 
-    {/* <Brands togglePopup={togglePopup} togglePopup={togglePopup} /> */}
 
 
-<NavBar signInUser={signInUser}  categories={togglePopup} userProfile={userProfile} handleBrands={handleBrands} handleContacts={handleContacts} handleOffers={handleOffers} cartPage={cartPage} />
+<NavBar signInUser={signInUser}  categories={handleCategories} userProfile={userProfile} handleBrands={handleBrands} handleContacts={handleContacts} handleOffers={handleOffers} cartPage={cartPage} />
 {userBar && <div className="user-profile-bar" ref={userProfileBar}>
   <p></p>
   <p className='checkProfile'>PROFILE</p>

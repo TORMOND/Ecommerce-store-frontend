@@ -21,7 +21,7 @@ const SelectedProduct = ({initiatePayment}) => {
         setItems(updatedItems);
         localStorage.setItem('items', JSON.stringify(updatedItems));
         console.log(event);
-     alert('Added to cart')
+        alert('Added to cart')
    }
  
     return ( 

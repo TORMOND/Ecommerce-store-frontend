@@ -8,6 +8,7 @@ import LoginPage from './Pages/LoginPage';
 import SignUpPage from './Pages/SignupPage';
 import Cart from './Pages/Cart';
 import AdminPage from './Pages/AdminPage';
+import FilteredCategories from './Pages/FilteredCategories';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
     <Route path='/cart' element={<Cart/>}></Route>
     <Route path='/AdminPage' element={<AdminPage/>}></Route>
     <Route path='/ProductPage/:id' element={<ProductPage/>}></Route>
+    <Route path='/:id' element={<FilteredCategories />}></Route>
     <Route path="*"  element={<NotFound />}></Route>
   </Routes>
 
