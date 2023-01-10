@@ -1,7 +1,7 @@
-import '../Pages/Admin.css';
+import '../Assets/Admin.css';
 import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays, faArrowRightFromBracket, faGear, faMagnifyingGlassChart, faHouse, faCirclePlus} from '@fortawesome/free-solid-svg-icons';
+import {  faCartShopping, faCalendarDays, faArrowRightFromBracket, faGear, faMagnifyingGlassChart, faHouse, faCirclePlus} from '@fortawesome/free-solid-svg-icons';
 
 
 const SideBar = ({createProject, logOut, onFileSelected, fileInput, view_products}) => {
@@ -20,7 +20,7 @@ const SideBar = ({createProject, logOut, onFileSelected, fileInput, view_product
                 
         <ul className='sideBar-list'>
       
-           <li> <Link to='/' className='Dashboard'>
+           <li> <Link to='/AdminPage' className='Dashboard'>
             <FontAwesomeIcon icon={ faHouse} ></FontAwesomeIcon>
             <p>DashBoard</p>
                 </Link></li>
@@ -29,7 +29,7 @@ const SideBar = ({createProject, logOut, onFileSelected, fileInput, view_product
             <p> Analytics</p>
                </li>
                <li className='Settings' onClick={view_products}>
-            {/* <FontAwesomeIcon icon={ faGear}></FontAwesomeIcon> */}
+            <FontAwesomeIcon icon={ faCartShopping}></FontAwesomeIcon>
             <p>Products</p>
                 </li>
               <li> 

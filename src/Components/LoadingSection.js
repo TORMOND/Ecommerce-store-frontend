@@ -1,4 +1,4 @@
-import './loading.css';
+import '../Assets/loading.css';
 
 const LoadingSection = () => {
     return ( 

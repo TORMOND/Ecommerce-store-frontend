@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import '../index.css';
+import '../Assets/index.css';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBars, faCaretDown } from '@fortawesome/free-solid-svg-icons';

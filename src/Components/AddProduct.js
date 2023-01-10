@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import '../Pages/Admin.css';
+import '../Assets/Admin.css';
 
 const AddProduct = ({closePopoup }) => {
 

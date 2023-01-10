@@ -2,7 +2,7 @@
 import Footer from "../Components/footer";
 import NavBar from "../Components/NavBar";
 import {useNavigate } from 'react-router-dom'
-import '../index.css';
+import '../Assets/index.css';
 import { useEffect, useState } from 'react';
 
 const Cart = () => {

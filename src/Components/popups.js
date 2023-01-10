@@ -1,4 +1,4 @@
-import '../index.css';
+import '../Assets/index.css';
 import { useState, useRef } from "react";
 
 // FontAwesome

@@ -1,4 +1,4 @@
-import '../index.css';
+import '../Assets/index.css';
 import useFetch from '../UseFetch'
 import { useState } from 'react';
 // FontAwesome

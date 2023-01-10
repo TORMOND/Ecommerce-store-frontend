@@ -1,24 +1,24 @@
-import './Admin.css'
+import '../Assets/Admin.css'
 import {  useRef, useState } from 'react';
 import SideBar from '../Components/sidebar';
 // import PopUps from '../Components/popups';
 import AddProduct from '../Components/AddProduct';
-import ViewProducts from '../Components/ViewProducts';
+// import ViewProducts from '../Components/ViewProducts';
 import Purchases from '../Components/Purchases';
+import ProductsReview from '../Components/ProductsReview';
 const AdminPage = () => {
-    const [searchCustomerDetails, setSearchCustomerDetails] = useState('')
+    // const [searchCustomerDetails, setSearchCustomerDetails] = useState('')
     const fileInput = useRef()
     const [show, setShow] = useState(false);
     const popup =useRef()
     const [displayPurchases, setDisplayPurchases] =useState(true)
     const purchaseRef = useRef()
+    
 
     const [displayProducts, setDisplayProducts] = useState(false)
-    const productsRef =useRef()
+    // const productsRef =useRef()
     // const { inputImage, setInputImage } = useState(null)
     
-  
-  
    const createProject =()=>{
      fileInput.current.click()
    }
@@ -49,6 +49,10 @@ const AdminPage = () => {
         setShow(false)
         localStorage.removeItem('selectedImage')
     }
+    const view_products =()=>{
+    setDisplayPurchases(false)
+    setDisplayProducts(true)
+    }
     return ( 
         <div className="AdminPage">
             {show &&<div id="popups" ref={popup}>
@@ -58,17 +62,21 @@ const AdminPage = () => {
             }
             <div id="wrapper">
             <div className="side-menu">
-                <SideBar onFileSelected={onFileSelected} createProject={createProject} fileInput={fileInput} />
+                <SideBar 
+                onFileSelected={onFileSelected} 
+                createProject={createProject} fileInput={fileInput}
+                 view_products={view_products} />
             </div>
 
             {displayProducts &&
-            <ViewProducts ref={productsRef} />
+            // <ViewProducts ref={productsRef} />
+            <ProductsReview />
             }
             
             {displayPurchases &&
             <Purchases ref={purchaseRef} /> 
             }
-     
+            
             </div>
            
         </div>

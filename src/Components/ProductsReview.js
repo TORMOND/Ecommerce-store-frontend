@@ -1,39 +1,20 @@
 import '../Assets/index.css';
 import useFetch from '../UseFetch';
 
-// FontAwesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
-import Loading from './Loading';
-// import { faUser } from '@fortawesome/free-regular-svg-icons';
 
-import { useNavigate } from 'react-router-dom';
-import LoadingSection from './LoadingSection';
-
-const Products = () => {
-   
+const ProductsReview = () => {
      const {data:products, isPending, error} = useFetch('http://localhost:4000/api/products/')
 
-     const navigate = useNavigate()
+   
      const selectProduct = (event, id)=>{
-      navigate(`/ProductPage/${id}`)
+    
       console.log(event)
       console.log(id)
      }
-     
     return ( 
-        <>
-        <div className="products-section">
-               {isPending &&              
-         <LoadingSection />        
-                  }
-               {error &&       
-             <LoadingSection />
-               }
+        <div id="products-review">
+  <div className="products-section">
 
-<div className="selections">
-           <h3>Mobile Devices</h3>     
-            </div>
  <div className="new-Arrivals">
                {products && products.filter((product)=>product.device ==="mobile").map((product)=> (
                   
@@ -46,11 +27,7 @@ const Products = () => {
                   <div className="product-infor">
                   <p>{product.title}</p>
                   <div className="rating">
-                  <FontAwesomeIcon icon={ faStar} className='ratings' />
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={faStarHalfStroke} className='ratings'  />
+                
                   <p>123</p>
                   </div>
                   
@@ -67,12 +44,7 @@ const Products = () => {
                
             
             </div>
-            <div className="selections">
-           <h3>PCs</h3>  
-            </div>
-
             
- 
             <div className="top-sellers">
             {products && products.filter((product)=> product.device ==="PC").map((product)=> (
             
@@ -83,15 +55,6 @@ const Products = () => {
                   </div> 
                   <div className="product-infor">
                   <p className='Product-title'>{product.title}</p>
-                  <div className="rating">
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={faStarHalfStroke} className='ratings'  />
-                  <p>123</p>
-                  </div>
-                  
 
                   <span>${product.price}</span>
                   <div className="btn">
@@ -105,20 +68,12 @@ const Products = () => {
                ))}   
                
             </div>
-            <div className="selections">
-           <h3>Deal of The Day</h3>     
-            </div>
+ 
            
  
-            <div className="deals">
-               {products && products.filter((product)=>product.device ==="mobile").map((product)=> (
-               <div className="product"></div>
-               )
-)}
-            </div>
         </div>
-        </>
+        </div>
      );
 }
  
-export default Products;
+export default ProductsReview;

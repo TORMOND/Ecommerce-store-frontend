@@ -1,4 +1,4 @@
-import '../index.css';
+import '../Assets/index.css';
 
 const Loading = () => {
     return ( 

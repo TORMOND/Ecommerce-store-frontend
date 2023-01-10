@@ -3,7 +3,7 @@ import NavBar from "../Components/NavBar";
 import SelectedProduct from "../Components/SelectedProduct";
 import { useNavigate,  useParams } from 'react-router-dom';
 // import React, { useState, useEffect } from "react";
-import '../index.css';
+import '../Assets/index.css';
 
 // import { loadStripe } from "@stripe/stripe-js";
 // import { Elements } from "@stripe/react-stripe-js";

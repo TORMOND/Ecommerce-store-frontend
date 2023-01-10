@@ -1,4 +1,4 @@
-import '../Pages/Admin.css'
+import '../Assets/Admin.css'
 import {  useRef, useState } from 'react';
 
 // import PopUps from '../Components/popups';
