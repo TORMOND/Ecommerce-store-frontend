@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg-color:#ceced1;
+  --primary-color:purple;
+  --secondary-color:#fff;
+}
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+  }
+  
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+    font-weight: 900;
+  }
+  h2 {
+    font-weight: 700;
+    font-size: 2.0em;
+  }
+  h3 {
+    font-weight: 700;
+    font-size: 1.2em;
+  }
+  h4 {
+    font-weight: 600;
+  }
+  
+  .ratings{
+    color: orange; 
+  }
+  #wrapper{
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+.sideBar-list{
+  list-style: none;
+  display: inline-flex;
+  padding: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  gap:10px;
+  align-items: center;
+} 
+.sideBar-list li:hover{
+  color: var(--primary-color);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  transition: 0.5s;
+}
