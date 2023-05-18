@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --bg-color:#ceced1;
-  --primary-color:purple;
-  --secondary-color:#fff;
-}
   body {
     margin: 0;
     min-width: 320px;
@@ -29,7 +24,6 @@
   h4 {
     font-weight: 600;
   }
-  
   .ratings{
     color: orange; 
   }
@@ -53,4 +47,13 @@
   color: var(--primary-color);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   transition: 0.5s;
+}
+#popups{
+  width: 100%;
+ background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 2;
+  overflow-y: auto;
+  height: 100vh;
+  display: flex;
 }

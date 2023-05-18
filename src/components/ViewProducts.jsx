@@ -1,4 +1,4 @@
-// import '../Assets/index.css'
+
 // import {  useRef, useState } from 'react';
 import useFetch from '../UseFetch'
 
@@ -20,8 +20,8 @@ const ViewProducts = ({closePopup}) => {
          closePopup()
         }
      }
-     const updateItem = (id)=>{
-
+     const updateItem = async(id)=>{
+       
      }
      const close = ()=>{
         closePopup()

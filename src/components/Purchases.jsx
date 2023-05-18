@@ -1,15 +1,11 @@
 // import '../Assets/Admin.css'
-import {  useRef, useState } from 'react';
+import { useState } from 'react';
 
-// import PopUps from '../Components/popups';
 const Purchases = () => {
     const [searchCustomerDetails, setSearchCustomerDetails] = useState('')
-    // const fileInput = useRef()
-    const [show, setShow] = useState(false);
-    // const popup =useRef()
-    // const { inputImage, setInputImage } = useState(null)
-    
-    const [purchases, setPurchases] = useState([
+    // const [show, setShow] = useState(false);
+
+    const [purchases] = useState([
         {id:1, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
         {id:2, name:"Victor Monderu", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
         {id:3, name:"Jane Njeri", item:"iPhone 14",price: 1699 , paid:"confirmed", dispatched:"confirmed", delivered:"confirmed", returned:false},
@@ -27,10 +23,10 @@ const Purchases = () => {
         
     const purchasesToDisplay = searchCustomerDetails ? handleSearch : purchases;  
 
-    const closePopup = ()=>{
-        setShow(false)
-        localStorage.removeItem('selectedImage')
-    }
+    // const closePopup = ()=>{
+    //     setShow(false)
+    //     localStorage.removeItem('selectedImage')
+    // }
     return ( 
 
        
@@ -74,8 +70,8 @@ const Purchases = () => {
                         <h3>Returned</h3>
                     </div>
                 </div>
-                {purchasesToDisplay && purchasesToDisplay.map((purchase, key)=>(
-                <div className="customer-purchase-information" key={purchase.id}>
+                {purchasesToDisplay && purchasesToDisplay.map((purchase, id)=>(
+                <div className="customer-purchase-information" key={id}>
                 
                     <div className="customer-name">{purchase.name}</div>
                     <div className="other-purchase-details">

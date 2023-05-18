@@ -1,55 +1,17 @@
-// import '../Assets/Admin.css'
 import {  useRef, useState } from 'react';
-import SideBar from '../components/sidebar';
-import AddProduct from '../components/AddProduct';
-import Purchases from '../components/Purchases';
-import ProductsReview from '../components/ProductsReview';
-import ViewProducts from '../components/ViewProducts';
-// import Analytics from '../Components/Analytics';
 
-
-// import { SideBar, AddProduct, Purchases, ProductsReview, ViewProducts } from '../Components';
+import { SideBar, AddProduct, Purchases, ProductsReview, ViewProducts, Analytics, CreateProduct } from '../components';
 
 const AdminPage = () => {
     // const [searchCustomerDetails, setSearchCustomerDetails] = useState('')
-  
-    
-    const fileInput = useRef()
     const [show, setShow] = useState(false);
-
     const popup =useRef()
     const [displayPurchases, setDisplayPurchases] =useState(true)
     const purchaseRef = useRef()
-
     const [displayProducts, setDisplayProducts] = useState(false)
-
-    // const [displayAnalytics, setDisplayAnalytics ] = useState(false)
+    const [displayAnalytics, setDisplayAnalytics ] = useState(false)
     // const productsRef =useRef()
     // const { inputImage, setInputImage } = useState(null)
-    
-   const createProject =()=>{
-     fileInput.current.click()
-   }
-
-   const onFileSelected =(event)=>{
-    const files = event.target.files;
-    let filename = files[0].name;
-    const fileReader = new FileReader();
-    
-    console.log(files);
-    fileReader.addEventListener('load', () =>{     
-      const imageUrl = fileReader.result;
-    //   setInputImage(imageUrl)
-     console.log(imageUrl);
-      console.log(filename); 
-      localStorage.setItem('selectedImage', imageUrl)
-      setShow(true)
-    })
-    
-    fileReader.readAsDataURL(files[0]);
-    const image = files[0];
-    console.log(image);
-          } 
         
     const closePopup = ()=>{
         setShow(false)
@@ -60,7 +22,7 @@ const AdminPage = () => {
     setDisplayProducts(true)
     }
     const viewAnalytics = ()=>{
-      // setDisplayAnalytics(true)
+      setDisplayAnalytics(true)
       setDisplayPurchases(false)
     setDisplayProducts(false)
     }
@@ -75,6 +37,31 @@ const AdminPage = () => {
     setDisplayPurchases(true)
     setDisplayProducts(false)
    }
+  //  const fileInput = useRef()
+  
+     const onFileSelected =(event)=>{
+      const files = event.target.files;
+      let filename = files[0].name;
+      const fileReader = new FileReader();
+      
+      console.log(files);
+      fileReader.addEventListener('load', () =>{     
+        const imageUrl = fileReader.result;
+      //   setInputImage(imageUrl)
+       console.log(imageUrl);
+        console.log(filename); 
+        localStorage.setItem('selectedImage', imageUrl)
+        setShow(true)
+      })
+      
+      fileReader.readAsDataURL(files[0]);
+      const image = files[0];
+      console.log(image);
+      setShow(true)
+            } 
+const handleClick = ()=>{
+  // fileInput.current.click()
+}
 
     return ( 
         <div className="w-screen min-h-screen box-border">
@@ -89,26 +76,31 @@ const AdminPage = () => {
             <div id="flex w-screen min-h-screen box-border">
             <div className="h-screen w-1/4 top-0 sticky box-border">
                 <SideBar 
-                onFileSelected={onFileSelected} 
-                createProject={createProject}
-                fileInput={fileInput}
                 view_products={view_products}
                 dashboard ={dashboard}
                 viewAnalytics={viewAnalytics}
-                 />
+                 >
+                <CreateProduct  onFileSelected={onFileSelected} >
+                <button type="button" onClick={handleClick} 
+                 className='bg-purple-500 text-white flex flex-col gap-2.5 py-5 cursor-pointer rounded-sm'
+                 >
+                  Create Product
+                   </button>
+                </CreateProduct>
+                  </SideBar>
             </div>
 
             {displayProducts &&
             <ProductsReview  runSetProducts={ runSetProducts } />
             }
             
-            {displayPurchases &&
+            {/* {displayPurchases &&
             <Purchases ref={purchaseRef} /> 
-            }
-{/* 
+            } */}
+
            {displayAnalytics &&
             <Analytics />
-               } */}
+               }
             
             </div>
            

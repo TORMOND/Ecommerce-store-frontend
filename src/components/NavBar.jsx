@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState} from 'react';
 // import '../Assets/index.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../Hooks/useAuthContext';
@@ -14,13 +14,9 @@ const NavBar = ({signInUser, categories, userProfile, handleBrands, handleContac
   const navigate = useNavigate()
   const {user} = useAuthContext()
 
- const [carts , setCart] = useState(0)
+ const [carts ] = useState(items.length || 0)
   // items ??  const [carts , setCart] = useState( 0) : const [carts , setCart] = useState(items.length)
 
-  useEffect(()=>{
-   items ? setCart(0) : setCart(items.length)
-
-  }, [])
 //  const {search, setSearch} = useState('')
 
 const  cartValue =useRef()

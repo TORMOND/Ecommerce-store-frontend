@@ -3,21 +3,13 @@ import  { useState, useRef } from 'react';
 import { useLogout } from '../Hooks/useLogout';
 
 
-import NavBar from '../components/NavBar';
-import Products from '../components/Products';
-import Footer from '../components/footer';
-import PopUps from '../components/popups';
-import Brands from '../components/Brands';
-import Contacts from '../components/Contacts';
-
+import { NavBar, Products, Footer, PopUps, Brands, Contacts }from '../components';
 
 const Home = () => {     
 
-   const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [userBar, setUserBar] = useState(false)
-  // const {popups, setPopups} = useState(true)
-  // const popup = useRef()
   const userProfileBar =useRef(null)
   const { logout } = useLogout()
   const [show, setShow] = useState(false);
@@ -56,7 +48,6 @@ const handleContacts=()=>{
 }
 
 const [search, setSearch] = useState('')
-// console.log(search, setSearch)
 
     return ( 
         <div className="relative">
@@ -76,15 +67,6 @@ const [search, setSearch] = useState('')
    <Contacts ref={contacts_ref} togglePopup={togglePopup}  />
 
     </div>}
-    {/* { contacts && <div id='popups' ref={ref}>
-
-   <Contacts ref={contacts_ref} togglePopup={togglePopup}  />
-
-    </div>} 
-    
-    */}
-
-
 
 <NavBar
  signInUser={signInUser}  categories={handleCategories}

@@ -1,20 +1,17 @@
+// import { useRef} from 'react';
 import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faCartShopping, faCalendarDays, faArrowRightFromBracket, faGear, faMagnifyingGlassChart, faHouse, faCirclePlus} from '@fortawesome/free-solid-svg-icons';
 
 
-const SideBar = ({createProject, logOut, viewAnalytics, onFileSelected, fileInput, view_products, dashboard}) => {
+const SideBar = ({ logOut, viewAnalytics, view_products,setShow, dashboard}) => {
+    // const { logOut, viewAnalytics, view_products, setShow, dashboard } = props;
+   
     return ( 
         <template>
     <div className="py-5 px-4 h-screen box-border shadow-lg shadow-gray-300">
                 <h2>Admin Page</h2>
-                <div>
-                <input type="file" name="" id="" className='fileInput' onChange={onFileSelected} ref={fileInput} />
-                 <p className='bg-purple-500 text-white flex flex-col gap-2.5 py-5 cursor-pointer rounded-sm'  onClick={createProject}>
-              Create Product
-              <FontAwesomeIcon icon={ faCirclePlus} />
-            </p>     
-                </div>
+              
                 
         <ul className='flex flex-col justify-center my-5 p-0 h-5/6'>
       
