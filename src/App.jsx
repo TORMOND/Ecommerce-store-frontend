@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import Home from './Pages/Home';
 import NotFound from './Pages/NotFound';
@@ -6,13 +6,13 @@ import ProductPage from './Pages/ProductPage';
 import LoginPage from './Pages/LoginPage';
 import SignUpPage from './Pages/SignupPage';
 import Cart from './Pages/Cart';
-import AdminPage from './Pages/AdminPage';
-import FilteredCategories from './Pages/FilteredCategories';
-import { useAuthContext } from './Hooks/useAuthContext';
+import FilteredCategoryPage from './Pages/FilteredCategories';
+import Success from './Pages/Success';
+import Cancel from './Pages/Cancel';
+import Contacts from './Pages/Contacts';
 
 
 function App() {
-const { user } = useAuthContext()
 
   return (
     <div className="App">
@@ -23,10 +23,11 @@ const { user } = useAuthContext()
     <Route path='/LoginPage' element={<LoginPage />}></Route>
     <Route path='/SignupPage' element={<SignUpPage />}></Route>
     <Route path='/cart' element={<Cart/>}></Route>
-    <Route path='/AdminPage' element={<AdminPage/>}></Route>
-    {/* <Route path='/AdminPage' element={ user? <AdminPage/>: <Navigate to="/LoginPage" />}></Route> */}
+    <Route path='/cancel' element={<Cancel/>}></Route>
+    <Route path='/contactUs' element={<Contacts/>}></Route>
+    <Route path='/success' element={<Success/>}></Route>
     <Route path='/ProductPage/:id' element={<ProductPage/>}></Route>
-    <Route path='/Filtered Items/:id' element={<FilteredCategories />}></Route>
+    <Route path='/Category/:categoryName' element={<FilteredCategoryPage />}></Route>
     <Route path="*"  element={<NotFound />}></Route>
   </Routes>
 

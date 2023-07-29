@@ -1,32 +1,24 @@
-import SideBar from './sidebar';
-import AddProduct from './AddProduct';
-import Purchases from './Purchases';
-import ProductsReview from './ProductsReview';
-import ViewProducts from './ViewProducts';
-import Analytics from './Analytics';
-import CreateProduct from './CreateProduct';
+import Brands from './Brands'
 import NavBar from './NavBar';
 import Products from './Products';
 import Footer from './footer';
 import PopUps from './popups';
-import Brands from './Brands';
-import Contacts from './Contacts';
-import FetchCarts from "./FetchCart";
+import Modal from './Modal';
+import HeroSection from './HeroSection';
+import Categories from './Categories';
+import MpesaModal from './MpesaModal'
+import Carousel from './carousel/Carousel';
 
 
 export {
-    SideBar,
-    AddProduct,
-    Purchases,
-    ProductsReview,
-    ViewProducts,
-    Analytics,
-    CreateProduct, 
+    Brands,
     NavBar,
     Products,
     Footer,
     PopUps,
-    Brands,
-    Contacts,
-    FetchCarts
+    HeroSection,
+    Categories,
+    Modal,
+    MpesaModal,
+    Carousel
 }

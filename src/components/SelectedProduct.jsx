@@ -1,85 +1,140 @@
-import useFetch from '../UseFetch'
-import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import useFetch from '../UseFetch';
+import { CartContext } from "../Context/CartContext";
+import { useContext, useState, useEffect } from "react";
 
-import StripeCheckout from 'react-stripe-checkout'
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faStarHalfStroke, faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { useCartsContext } from "../Hooks/UseCartContext";
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
-
-// import { faUser } from '@fortawesome/free-regular-svg-icons';
+import MpesaModal from './MpesaModal';
 
 const SelectedProduct = () => {
-  const { dispatch} = useCartsContext()
-  const id = localStorage.getItem('id')
-  // const navigate = useNavigate()
-
-
-   const {data:product, isPending, error} = useFetch('http://localhost:4000/api/products/' + id)
-  //  const {inCart, setInCart} = useState(false)
-
-   const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || []);
-
-   const addToCart =()=>{
-
-    const updatedItems = [...items];
-
-        updatedItems.push(product)
-        setItems(updatedItems);
-        localStorage.setItem('items', JSON.stringify(updatedItems));
-        alert('Added to cart')
-        dispatch({type: 'CREATE_CARTS', payload: items})
+  const id = localStorage.getItem('id');
+  const [canceled, setIsCanceled] = useState(false)
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (window?.location.href.includes('success')) {
+      setIsSuccess(true);
+      // clearCart();
+    }
+    if (window?.location.href.includes('canceled')) {
+      setIsCanceled(true);
+      // clearCart();
+    }
+  }, []);
+   const {data:product, isPending, error} = useFetch('http://localhost:4000/api/products/' + id);
+   const [isSuccess,setIsSuccess] = useState(false);
+   let [quantity, setQuantity] = useState(1);
+   
+   const incrementQuantity=()=>{
+    setQuantity(quantity++)
    }
- 
-
- const makePayment = token=>{
+   const decrementQuantity=()=>{
+    setQuantity(quantity--)
+   }
+ const makePayment = ()=>{
   const body ={
-    token,
-    product
+    id:'price_1NRaJ8HywWCM81uobqVqr415',
+    quantity:quantity,
   }
   const headers ={
     "Content-Type": "application/json"
   }
-  return fetch(`http://localhost:4000/api/payment/create-payment-intent`,{
+  return fetch(`http://localhost:4000/api/payment/create-payment-intent-trial`,{
     method:"POST",
     headers,
     body:JSON.stringify(body)
-  }).then(response=>{
-    console.log(response)
-    // sendPayInforToDtb(response)
-  }).catch(error=>{
+  }).then((response) => {
+    return response.json();
+}).then((response) => {
+    if(response.url) {
+        window.location.assign(response.url); // Forwarding user to Stripe
+    }
+  
+}).catch(error=>{
     console.log(error)
   })
  }
 
+ const cart = useContext(CartContext);
+const inCart =(id)=>{
+
+console.log( cart.getProductData(id))
+ }
+ const [mpesaModal, setMpesaModal] = useState(false)
+ const mpesaPay=()=>{
+  console.log("Event Fired")
+  setMpesaModal(true)
+  }
+  const closeMpesa=()=>{
+    setMpesaModal(false)
+  }
+  if (isSuccess) {
+    return (
+      <>
+
+        <div className="">
+          <div className="">
+            <div className="">
+              <h1>Thanks for your order!</h1>
+              <p>We will email you when your order will be sent.</p>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+  if (canceled) {
+    return (
+      <>
+
+        <div className="">
+          <div className="">
+            <div className="">
+              <h1>Order canceled</h1>
+              <p>.</p>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
     return ( 
-       
-     <>
-{isPending && <div>
+       <div>
+ {mpesaModal && product &&
+      <MpesaModal
+      toggleMpesa={closeMpesa}
+      amount={product.price}
+      items={product.title}
+      />
+      }
+      
+     <div className="min-h-[80vh]">
+{isPending && <div className='w-screen box-border'>
         <div className="loading-selected-product">
-        <div className="loading-image">
+        <div className="loading-image animate-pulse ">
 
 </div>
- <div className="loading-infor">
-<div className="loading-title"></div>
-<p className="loading-brand"></p>
-<div className="loading-rating"></div>
-<p className="loading-price"></p>
-<div className="loading-details">
-  <ul className='loading-specs'>
+ <div className="loading-infor animate-pulse ">
+<div className="loading-title animate-pulse "></div>
+<p className="loading-brand animate-pulse "></p>
+<div className="loading-rating animate-pulse "></div>
+<p className="loading-price animate-pulse "></p>
+<div className="loading-details animate-pulse ">
+  <ul className='loading-specs animate-pulse '>
     <li></li>
   </ul>
 </div>
  </div>
- <div className="loading-actions">
-  <div className="loading-price"></div>
-  <div className="loading-extra-fees"></div>
-  <div className="loading-delivery-period"></div>
-  <div className="loading-btns">
-    <button></button>
-    <button></button>
+ <div className="loading-actions animate-pulse ">
+  <div className="loading-price animate-pulse "></div>
+  <div className="loading-extra-fees animate-pulse "></div>
+  <div className="loading-delivery-period animate-pulse "></div>
+  <div className="loading-btns animate-pulse ">
+    <button className='animate-pulse '></button>
+    <button className='animate-pulse '></button>
   </div>
  </div>
         </div>
@@ -118,22 +173,17 @@ const SelectedProduct = () => {
         </div>}
 
 {product && 
- <div className="flex w-full bg-white min-h-screen">
+ <div className="flex gap-2 items-start w-full bg-white min-h-screen">
       
 <div className="w-2/5 top-36 sticky object-cover h-5/6">
 <img src={product.img} alt={product.title} className='h-full w-full' />
 </div>
-<div className="w-2/5 flex flex-col justify-start mt-5 text-start">
+<div className='w-3/5 flex flex-col lg:flex-row gap-2.5 '>
+
+<div className="w-full lg:w-3/5 flex flex-col justify-start mt-5 text-start">
 <h2 className='product-title'>{product.title}</h2>
 <p className='product-brand'>Brand:{product.brands}</p>
-<div className="rating">
-                  <FontAwesomeIcon icon={ faStar} className='ratings' />
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
-                  <FontAwesomeIcon icon={faStarHalfStroke} className='ratings'  />
-                  <p>123</p>
-                  </div>
+
 <h3 className='product-price'>${product.price}</h3>
 
 <div className="details">
@@ -146,47 +196,54 @@ const SelectedProduct = () => {
     </ul>
 </div>
 </div>
-<div className="w-1/4 mt-5 rounded-sm border border-gray-300 flex flex-col gap-5 p-4 text-start ">
-<h3 className='product-price'>${product.price}</h3>
-<p className='extra-fees'>${product.price * 0.17} Shipping & Import Fees Deposit to Kenya <span className='text-blue-500 cursor-pointer hover:underline underline-offset-4 '> Details</span> </p>
-
-{/* <p className='delivery-period'>Delivery: February 7 - 10</p> */}
+<div className="w-full lg:w-2/5 top-36 sticky mt-5 rounded-sm border border-gray-300 flex flex-col gap-5 p-4 text-start ">
+<h3 className='product-price'>${product.price*quantity}</h3>
+ 
+{product.stripeId}
 
 <div className="flex flex-col gap-5 py-2.5 px-4 ">
-  {/* {
-   inCart ?  <button onClick={event=>addToCart(event ,product._id)}><FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />Add to Cart</button>:
-   <button disabled><FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />incart</button>
-   
-  } */}
-    
-    <button onClick={event=>addToCart(event ,product._id)} 
+<div className="flex gap-2 item-center">
+            <h3>Quantity:</h3>
+          <button disabled={quantity===1000} onClick={incrementQuantity} className="p-2 border w-10">+</button>
+          <div className="text-lg">{quantity}</div>
+          <button onClick={decrementQuantity} disabled={quantity===1} className="p-2 border w-10">-</button>
+
+          </div>
+  <div>
+     <button onClick={() => cart.removeOneToCart(product._id)} 
+     className=""
+     >remove from cart </button>
+  </div>
+  <button onClick={()=>inCart(product._id)}>incart ?</button>
+  
+   <button onClick={()=>cart.addOneToCart(product)} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '
    >
       <FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />Add to Cart</button>
-  
 
-<StripeCheckout
-stripeKey="pk_test_51MRy78HywWCM81uo7ItDdAeqigeCdJPJi81SFvc2BjRRflU6hLp2dU8LghwcMocC97J6Olxwv1YtIg9zOueOO7zK00PMAjUvtR"
-token={makePayment}
-name="buy product"
-amount={product.price}
->
-  <button onClick={makePayment} 
+
+  <button onClick={()=>makePayment(product.stripeId)} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '
    >
+    Buy Now
+   </button>
+<div className="">
+  <button onClick={mpesaPay} 
+   className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-green-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-green-500 outline outline-offset-2 outline-green-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-green-400  hover:before:w-80 '
+   >
+    Pay with Mpesa
+   </button>
+</div>
+
     
-    Buy Now</button>
 
-
-</StripeCheckout>
-    
-
+</div>
 </div>
 </div>
   </div>
 
-}   
-        </>
+}    </div>
+        </div>
      );
 }
 

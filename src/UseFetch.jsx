@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
+import { ProductsContext } from './Context/ProductsContext';
+import { useContext } from "react";
 
 
 const useFetch = (url) => {
-  // const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || []);
     const [data, setData] = useState(null);
     const [isPending, setPending] = useState(true);
     const[error, setError] = useState(null)
-    
+    const prodContext = useContext(ProductsContext);
 
     useEffect(()=>{
         fetch(url)
@@ -18,12 +19,14 @@ const useFetch = (url) => {
         }).then(data=> {    
           setData(data);
           setPending(false)
-          console.log(data)
+      
+          prodContext.setProducts(data)
+          // console.log(data)
         })
         .catch(error=> {
           setPending(false)
           setError(error.message)
-          console.log(error)
+          // console.log(error)
         })
         
       }, [url]);

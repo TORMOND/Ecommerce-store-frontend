@@ -57,3 +57,114 @@
   height: 100vh;
   display: flex;
 }
+
+/* LOADING */
+.loading-selected-product{
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  min-height: 100vh;
+}
+.loading-image{
+  background-color: #ceced1;
+  border-radius: 10px;
+  width: 35%;
+  top:0;
+  position: sticky;
+  object-fit: cover;
+  height: 95vh;
+}
+.loading-specs{
+  margin-top: 50px;
+}
+.loading-specs li{
+  text-align: start;
+  padding-block:10px;
+  background-color: #ceced1;
+  list-style: none;
+  border-radius: 32px;
+  width: 60%;
+  margin-top: 10px;
+ }
+ .loading-title{
+  background-color: #ceced1;
+  border-radius: 32px;
+  width: 88%;
+  padding-block: 16px;
+ }
+ .loading-infor{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 24px;
+ }
+ .loading-price{
+  background-color: #ceced1;
+  width: 45%;
+  padding: 10px;
+  border-radius: 32px;
+ }
+ .loading-brand{
+  background-color: #ceced1;
+  width: 35%;
+  padding: 10px;
+  border-radius: 32px;
+ }
+ .loading-rating{
+  background-color: #ceced1;
+  width: 25%;
+  padding: 10px;
+  border-radius: 32px;
+ }
+ .loading-actions{
+  width: 25%;
+  border-radius: 5px;
+  border: 0.5px solid #ceced1;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+  padding: 16px;
+  text-align: start;
+}
+.loading-extra-fees{
+  background-color: #ceced1;
+  padding: 10px;
+  width: 100px;
+}
+.loading-delivery-period{
+  background-color: #ceced1;
+  width: 100px;
+  padding: 10px;
+}
+.loading-btns{
+  display: flex;
+  gap:20px;
+  padding-block: 5px;
+}
+.loading-btns button{
+  cursor: pointer;
+  padding: 16px ;
+  border-radius: 10px;
+  text-decoration: none;
+  text-decoration: uppercase;
+  letter-spacing: 2px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  transition: color 1s;
+  background-color: #ceced1;
+  width: 100px;
+}
+.loading-btns button::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50px;
+  width: 0;
+  height: 100%;
+  background-color: purple;
+  transform: skewX(35deg);
+  z-index: -1;
+  transition: width 1s;
+}
