@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { allCategories }from "./data/categories";
 import { useNavigate } from 'react-router-dom';
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
+import '@splidejs/react-splide/css';
 // // or other themes
 import '@splidejs/react-splide/css/default';
 
@@ -24,23 +24,22 @@ const Categories = () => {
     navigate(`/Category/${categoryName}`)
   }
   return (
-    
+    <div className=" w-full flex justify-center">
         <Splide  
         options={options}
         hasTrack={true}
-        // className="w-full box-border p-3 bg-white text-purple-900 grid   gap-2.5 grid-cols-2  lg:grid-cols-4 "
-        className='w-full flex gap-2.5 p-3'
+        className='w-full flex gap-2.5 p-3 max-w-7xl'
         >
         {
             categories && categories.map((category, id)=>(
         <SplideSlide
-        onClick={()=>filteredCategoryPage(category.categoryName)}
-         className="cursor-pointer  bg-no-repeat bg-cover  duration-75 rounded-sm hover:shadow-xl shadow-gray-500/50 h-64 "   
+         onClick={()=>filteredCategoryPage(category.categoryName)}
+         className="cursor-pointer  bg-no-repeat bg-cover m-2 rounded-md overflow-hidden duration-75  hover:shadow-xl shadow-gray-500/50 h-64 flex items-end"   
          style={{backgroundImage: `url(${category.img})`}}
          key={id}>
-          <div className='w-full h-full duration-75 text-puple-600 hover:bg-[#00000071] hover:text-gray-100 flex flex-col justify-center items-center  '>
+          
+          <div className='w-full h-10 duration-75 text-puple-600 bg-[#0c0c0c8f] text-gray-100 flex flex-col justify-end items-center'>
             <h1 className="text-xl">{category.categoryName}</h1>
-          <h3>{category.items}</h3>
           </div>
           
         </SplideSlide>
@@ -48,7 +47,7 @@ const Categories = () => {
     }
       </Splide>
    
-   
+   </div>
   )
 }
 

@@ -58,7 +58,7 @@ const [searchCustomerDetails, setSearchCustomerDetails] = useState('');
 
     return(
         <motion.div
-         varaints= {containerVariants}
+         variants= {containerVariants}
          initial='hidden'
          animate='visible'
          className='w-screen bg-[#00000071] fixed z-20 h-screen flex justify-center items-center box-border'

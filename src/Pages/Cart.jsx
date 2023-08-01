@@ -38,7 +38,6 @@ const Cart = () => {
         }
         if (window?.location.href.includes('canceled')) {
           setIsCanceled(true);
-          // clearCart();
         }
       }, []);
 const checkout=()=>{
@@ -49,7 +48,7 @@ const checkout=()=>{
           const headers ={
             "Content-Type": "application/json"
           }
-          return fetch(`http://localhost:4000/api/payment/create-payment-intent-trial`,{
+          return fetch(`https://besk-merchants.netlify.app/.netlify/functions/api/api/payment/create-payment-intent-trial`,{
             method:"POST",
             headers,
             body:JSON.stringify(body)
@@ -124,20 +123,20 @@ if (isSuccess) {
  signInUser={signInUser} 
  toggleSearch={toggleSearch}
  />
-<div className="w-full box-border ">
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 mt-10">
+<div className="w-full box-border flex bg-gray-100">
+<div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 mt-10 max-w-7xl mx-auto">
 
   <div className="bg-white rounded-md p-2.5 col-start-1 col-end-3  ">
     <div className="p-2.5 border border-b-gray-300 text-start font-bold">
       <h2> Cart</h2>
     </div>
       {cart.items && cart.items.map((item, index)=>(
-          <div className="grid grid-cols-3 gap-2.5 p-2.5 border border-b-gray-300" key={index} >
-            <div className=" object-cover">
+          <div className="grid grid-cols-3 gap-2.5 p-2.5 border border-b-gray-300" key={index}>
+            <div className="h-36 w-36 rounded-md overflow-hidden object-cover">
                  <img src={item.img} alt={item.img} className='object-cover w-full' />
             </div>
          
-            <div className="text-start py-2.5 px-1.5  col-end-3  ">
+            <div className="text-start py-2.5 px-1.5  col-end-3 ">
             <h3>{item.title}</h3>
 
             <p className='mt-3 font-semibold'>{item.brands}</p>

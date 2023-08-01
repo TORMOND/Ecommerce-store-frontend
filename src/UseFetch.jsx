@@ -19,14 +19,11 @@ const useFetch = (url) => {
         }).then(data=> {    
           setData(data);
           setPending(false)
-      
           prodContext.setProducts(data)
-          // console.log(data)
         })
         .catch(error=> {
           setPending(false)
           setError(error.message)
-          // console.log(error)
         })
         
       }, [url]);

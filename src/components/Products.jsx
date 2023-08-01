@@ -34,11 +34,13 @@ const Products = () => {
              <LoadingSection />
                }
 
-            {products && <div className="flex gap-3 p-4 items-center">
+            {products && <div className="flex gap-3 py-2 px-4 items-center bg-red-400 justify-between">
                  <h3>Stationary</h3>   
                  <button onClick={()=>filteredCategoryPage('Stationary')} 
                  className='flex gap-1 duration-75 font-semibold hover:underline items-center hover:text-blue-400 '>View More <FontAwesomeIcon icon={faChevronRight} /></button>  
-            </div>}
+            </div>
+            
+            }
 
  <div className="grid  gap-2.5 grid-cols-2  lg:grid-cols-4">
 
@@ -46,7 +48,7 @@ const Products = () => {
                {products && products.filter((product)=>product.device ==="Stationary").slice(0, 4).map((product)=> (
                   <div   key={product._id}>
                   <div 
-                  className={`cursor-pointer  bg-white duration-75 rounded-sm hover:shadow-xl shadow-gray-500/50 aspect-square my-5`} 
+                  className={`cursor-pointer  bg-white duration-75 rounded-sm hover:shadow-xl shadow-gray-500/50 aspect-square `} 
                    onClick={event=>selectProduct(event, product._id)}>
                    
                    <div 
@@ -65,7 +67,8 @@ const Products = () => {
                ))}
                
             </div>
-{products && <div className="selections">
+
+{products && <div className="flex gap-3 py-2 px-4 items-center bg-red-400 justify-between mt-5">
                  <h3>Mobile Devices</h3>     
             </div>}
  <div className="grid  gap-2.5 grid-cols-2  lg:grid-cols-4">
@@ -92,9 +95,10 @@ const Products = () => {
                
             </div>
 
-         {/* <h2 className="text-2xl py-3">Featured Products on Amazon</h2> */}
+         <h2 className="text-2xl py-3">Featured Products on Amazon</h2>
             {products && 
-             <div className="selections">
+             <div className="flex gap-3 py-2 px-4 items-center bg-red-400 justify-between mt-5">
+   
              <h3>PCs</h3>  
               </div>}
            

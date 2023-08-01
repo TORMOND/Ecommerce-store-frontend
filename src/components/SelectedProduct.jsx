@@ -19,12 +19,11 @@ const SelectedProduct = () => {
       setIsSuccess(true);
       // clearCart();
     }
-    if (window?.location.href.includes('canceled')) {
+    if (window?.location.href.includes('cancel')) {
       setIsCanceled(true);
-      // clearCart();
     }
   }, []);
-   const {data:product, isPending, error} = useFetch('http://localhost:4000/api/products/' + id);
+   const {data:product, isPending, error} = useFetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/products/' + id);
    const [isSuccess,setIsSuccess] = useState(false);
    let [quantity, setQuantity] = useState(1);
    
@@ -34,15 +33,15 @@ const SelectedProduct = () => {
    const decrementQuantity=()=>{
     setQuantity(quantity--)
    }
- const makePayment = ()=>{
+ const makePayment = (stripeId)=>{
   const body ={
-    id:'price_1NRaJ8HywWCM81uobqVqr415',
+    id:stripeId,
     quantity:quantity,
   }
   const headers ={
     "Content-Type": "application/json"
   }
-  return fetch(`http://localhost:4000/api/payment/create-payment-intent-trial`,{
+  return fetch(`https://besk-merchants.netlify.app/.netlify/functions/api/api/payment/create-payment-intent-trial`,{
     method:"POST",
     headers,
     body:JSON.stringify(body)
@@ -59,10 +58,7 @@ const SelectedProduct = () => {
  }
 
  const cart = useContext(CartContext);
-const inCart =(id)=>{
 
-console.log( cart.getProductData(id))
- }
  const [mpesaModal, setMpesaModal] = useState(false)
  const mpesaPay=()=>{
   console.log("Event Fired")
@@ -111,7 +107,7 @@ console.log( cart.getProductData(id))
       />
       }
       
-     <div className="min-h-[80vh]">
+     <div className="min-h-[80vh] flex flex-col">
 {isPending && <div className='w-screen box-border'>
         <div className="loading-selected-product">
         <div className="loading-image animate-pulse ">
@@ -173,7 +169,7 @@ console.log( cart.getProductData(id))
         </div>}
 
 {product && 
- <div className="flex gap-2 items-start w-full bg-white min-h-screen">
+ <div className="flex gap-2 items-start w-full bg-white min-h-screen max-w-7xl mx-auto">
       
 <div className="w-2/5 top-36 sticky object-cover h-5/6">
 <img src={product.img} alt={product.title} className='h-full w-full' />
@@ -209,18 +205,11 @@ console.log( cart.getProductData(id))
           <button onClick={decrementQuantity} disabled={quantity===1} className="p-2 border w-10">-</button>
 
           </div>
-  <div>
-     <button onClick={() => cart.removeOneToCart(product._id)} 
-     className=""
-     >remove from cart </button>
-  </div>
-  <button onClick={()=>inCart(product._id)}>incart ?</button>
   
    <button onClick={()=>cart.addOneToCart(product)} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '
    >
       <FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />Add to Cart</button>
-
 
   <button onClick={()=>makePayment(product.stripeId)} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '

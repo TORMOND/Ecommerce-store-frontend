@@ -1,7 +1,7 @@
 import { useRef, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../Hooks/useAuthContext';
-import {useLogout} from '../Hooks/useLogout';
+import { useLogout } from '../Hooks/useLogout';
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +17,7 @@ const NavBar = ({ categories, userProfile, handleBrands, handleContacts, handleO
   const navigate = useNavigate();
   const {user} = useAuthContext();
   const cart = useContext(CartContext);
-  const logout = useLogout()
+  const logout = useLogout();
 
 const  cartValue =useRef();
 const cartPage =()=>{
@@ -33,20 +33,19 @@ const signInUser =()=>{
   navigate('/LoginPage')
 }
 const handleLogout =()=>{
-  logout()
+  logout();
 }
 const searchProduct =() =>{
  
 }
 
     return (
-   <div className="flex flex-col bg-gray-900  w-full box-border top-0 fixed z-20 mb-10">
+   <div className="flex flex-col bg-black w-full box-border top-0 fixed z-20 mb-10">
   
-     <div className="flex items-center justify-between bg-black w-full text-gray-50 py-2 px-4  box-border">
-      <h2 className='text-lg'>BESK MERCHANTS</h2>
+     <div className="flex items-center justify-between bg-black w-full  text-gray-50 py-2 px-4  box-border ">
+      <h2 className='text-lg'>BESK MERCHANTS</h2> 
   
-  
-      <div className="flex gap-5 items-center">
+      <div className="flex gap-5 items-center max-w-7xl">
       <div className="">
           <button onClick={toggleSearch} className="border-0 py-1 px-5 text-gray-50 cursor-pointer " ><FontAwesomeIcon icon={faMagnifyingGlass} size="lg" /></button>
       </div>

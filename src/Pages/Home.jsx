@@ -3,7 +3,8 @@ import  { useState, useRef } from 'react';
 import { useLogout } from '../Hooks/useLogout';
 
 
-import { NavBar, Products, Footer, PopUps, Brands, HeroSection, Categories, Carousel }from '../components';
+import { NavBar, Products, Footer, PopUps, Brands, HeroSection, Categories}from '../components';
+import Producst2 from '../components/Products2';
 import Modal from '../components/Modal';
 
 const Home = () => {     
@@ -56,7 +57,7 @@ const [isModal, setIsModal ] = useState(false);
 const [search, setSearch] = useState('')
 
     return ( 
-        <div className="relative bg-gray-300">
+        <div className="relative bg-gray-100">
 
    { show && <div id='w-full bg-[rgba(0,0,0,0.5)] fixed z-10 overflow-auto h-full flex' ref={ref}>
    
@@ -119,7 +120,9 @@ const [search, setSearch] = useState('')
 </div>
 
 <Categories />
-<Products />
+
+<Producst2 />
+{/* <Products /> */}
 
 <Footer
  generateForm={handleContacts}

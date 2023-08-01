@@ -10,7 +10,7 @@ const Footer = () => {
         navigate('/contactUs');
     }
     return ( 
-        <div className="w-full bg-white box-border mt-2.5">
+        <div className="w-full bg-white box-border mt-2.5  flex flex-col">
              <div className='w-full text-center p-4 border-b border-b-gray-300 flex flex-col justify-center'>
   <h2>Can`t Find What your Looking For ?</h2>
   <p>Contact us & we can find what your looking for & send you a notification</p>
@@ -21,7 +21,7 @@ const Footer = () => {
   </div>
 
 </div>
-            <footer className="grid grid-cols-1 md:grid-cols-2 gap-2.5 w-full h-64 p-5">
+            <footer className="grid grid-cols-1 md:grid-cols-2 gap-2.5 w-full h-64 p-5 max-w-7xl mx-auto">
              <div>
                     <h2>BESK MERCHANTS</h2>
                     <div>
@@ -78,7 +78,7 @@ const Footer = () => {
              </div>
 
             </footer>
-            <div className="w-full flex justify-between p-4">
+            <div className="w-full flex justify-between p-4 max-w-7xl mx-auto">
             <h4>@ Copyright:2023 BESK MERCHANTS </h4>
             <div className="flex gap-2.5 text-lg text-gray-500">
                 <p>Privacy Policy | Terms & Conditions </p>

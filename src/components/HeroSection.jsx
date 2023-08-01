@@ -19,7 +19,7 @@ const HeroSection = () => {
   
  
   return (
-    <div className='mt-10 pb-5 flex '> 
+    <div className='mt-10 pb-5 flex'> 
      <Splide  
      options={options}
      hasTrack={true}

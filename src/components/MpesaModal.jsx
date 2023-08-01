@@ -44,7 +44,7 @@ const [success, setSuccess] = useState(false);
 const makepayment =async(amount)=>{
   setLoading(true)
   amount=1;
-  const response = await fetch('https://5bee-197-136-36-5.ngrok-free.app/api/mpesaPayment/stk', {
+  const response = await fetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/mpesaPayment/stk', {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({phone,amount})
@@ -67,17 +67,24 @@ if(response.ok){
   return (
     <div className="">
       <motion.div
-         varaints= {containerVariants}
+         variants={containerVariants}
          initial='hidden'
          animate='visible'
          className='w-screen bg-[#00000071] fixed z-20 h-screen flex justify-center items-center box-border'
          >
-            <motion.div
-             varaints= {boxVariants}
+          {success && 
+<div className='flex items-center justify-center rounded-lg flex-col p-2 bg-gray-50 w-[80%]  min-h-2/5 lg:w-[60%] pb-5'>
+<p>Thank you for shopping with Us we shall contact  you via message  on about the product delivery</p>
+</div>
+}
+            
+            {!success &&<motion.div
+             variants= {boxVariants}
              initial='hidden'
              animate='visible'
              className='rounded-lg flex flex-col p-2 bg-gray-50 w-[80%]  min-h-2/5 lg:w-[60%] pb-5'
              >
+
                 <div className='w-full p-2 flex gap-2.5 justify-between items-center border-b border-b-gray-300'>
                    <div className="mx-auto">
                   <h2>Pay Ksh{Math.ceil(amount*140)}</h2>
@@ -110,15 +117,13 @@ if(response.ok){
  
 }
                   </button>
-{success && 
-<div className='flex items-center justify-center '>
-<p>Thank you for shopping with Us we shall contact you on about the product delivery</p>
-</div>
-}
+
 
                 </div>
             </motion.div>
+}
         </motion.div>
+
     </div>
   )
 }
