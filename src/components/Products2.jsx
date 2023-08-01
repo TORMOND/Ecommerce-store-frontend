@@ -61,7 +61,7 @@ return y
 
             {products &&
             items.map((item)=>(
-                <div key={products._id} className="w-screen box-border  my-4 rounded-sm overflow-hidden shadow-md shadow-gray-400/50">
+                <div key={products._id} className="w-screen box-border md:w-full my-4 rounded-sm overflow-hidden shadow-md shadow-gray-400/50">
              <div className="flex gap-3 py-2 px-4 items-center bg-red-400 justify-between">
                  <h3>{item}</h3>   
                  <button onClick={()=>filteredCategoryPage(`${item}`)} 
@@ -71,7 +71,7 @@ return y
             <Splide  
         options={options}
         hasTrack={true}
-        className='w-screen box-border h-full flex relative p-0 m-0 bg-white'>
+        className='w-screen box-border md:w-full h-full flex relative p-0 m-0 bg-white'>
    
                {products.filter((product)=>product.device ===item).slice(0, 10).map((product)=> (
                   <SplideSlide   key={product._id}
