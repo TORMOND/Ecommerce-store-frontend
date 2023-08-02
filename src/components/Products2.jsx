@@ -76,7 +76,7 @@ return y
             {products &&
             items.map((item)=>(
                 <div key={products._id} className="w-full my-4 rounded-sm overflow-hidden shadow-md shadow-gray-400/50">
-             <div className="flex gap-3 py-2 px-4 items-center bg-red-400 justify-between">
+             <div className="flex gap-3 py-2 px-4 items-center bg-purple-400 justify-between">
                  <h3>{item}</h3>   
                  <button onClick={()=>filteredCategoryPage(`${item}`)} 
                  className='flex gap-1 duration-75 font-semibold hover:underline items-center hover:text-blue-400 '>View More <FontAwesomeIcon icon={faChevronRight} /></button>  

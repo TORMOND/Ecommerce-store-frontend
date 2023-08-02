@@ -81,7 +81,7 @@ const Footer = () => {
 </div>
 
             </div>
-       <div className="w-full flex justify-between p-4 max-w-7xl mt-[240px] md:mt-2  mx-auto">
+       <div className="w-full flex flex-col md:flex-row justify-between p-4 max-w-7xl mt-[240px] md:mt-2  mx-auto">
             <h4>@ Copyright:2023 BESK MERCHANTS </h4>
             <div className="flex gap-2.5 text-lg text-gray-500">
                 <p>Privacy Policy | Terms & Conditions </p>
