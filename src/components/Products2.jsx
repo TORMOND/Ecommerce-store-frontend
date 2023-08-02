@@ -47,9 +47,24 @@ return y
       localStorage.setItem('categorySelected', categoryName)
       navigate(`/Category/${categoryName}`)
     }
-     
+    function getDeviceType() {
+      const width = window.innerWidth;
+      if (width < 768) {
+          return 'Mobile';
+      } else if (width >= 768 && width < 1024) {
+          return 'Tablet';
+      } else {
+          return 'Desktop';
+      }
+  }
+
+  // Usage example
+  const deviceType = getDeviceType();
+  console.log('Device type:', deviceType);
+  deviceType==='Mobile'? options.perPage = 2:options.perPage = 4
+  deviceType==='Tablet'? options.perPage = 3:options.perPage = 4
     return ( 
-        <div className="w-screen box-border flex ">
+        <div className="w-screen box-border md:w-full flex justify-center">
         <div className="bg-gray-100 p-5 max-w-7xl mx-auto">
 
                {isPending &&              
@@ -61,7 +76,7 @@ return y
 
             {products &&
             items.map((item)=>(
-                <div key={products._id} className="w-screen box-border md:w-full my-4 rounded-sm overflow-hidden shadow-md shadow-gray-400/50">
+                <div key={products._id} className="w-full my-4 rounded-sm overflow-hidden shadow-md shadow-gray-400/50">
              <div className="flex gap-3 py-2 px-4 items-center bg-red-400 justify-between">
                  <h3>{item}</h3>   
                  <button onClick={()=>filteredCategoryPage(`${item}`)} 
@@ -70,8 +85,9 @@ return y
 
             <Splide  
         options={options}
+        
         hasTrack={true}
-        className='w-screen box-border md:w-full h-full flex relative p-0 m-0 bg-white'>
+        className='w-full h-full flex relative p-0 m-0 bg-white'>
    
                {products.filter((product)=>product.device ===item).slice(0, 10).map((product)=> (
                   <SplideSlide   key={product._id}
@@ -84,8 +100,8 @@ return y
    >
    </div> 
                   <div className="p-4 font-semibold">
-                  <p>{product.title}</p>
-                  <span>${product.price}</span>
+                  <p className='text-sm md:text-md'>{product.title}</p>
+                  <span className=''>${product.price}</span>
                   
                   </div>
               

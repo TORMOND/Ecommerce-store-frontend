@@ -1,7 +1,7 @@
  import useFetch from '../UseFetch';
- import {useState, useRef} from 'react';
+ import {useState} from 'react';
  import {ProductsContext} from '../Context/ProductsContext'
-import { useContext } from "react";
+ import { useContext } from "react";
  import { NavBar, Footer, Modal  }from '../components';
 
 // FontAwesome
@@ -14,7 +14,7 @@ import LoadingSection from '../components/LoadingSection';
 
 const FilteredCategoryPage = () => { 
 
-    const { data:products, isPending, error } = useFetch('http://localhost:4000/api/products/');
+    const { data:products, isPending, error } = useFetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/products/');
     const prodContext = useContext(ProductsContext);
     prodContext.setFilteredItems(products);
 

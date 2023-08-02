@@ -23,6 +23,21 @@ const Categories = () => {
     localStorage.setItem('categorySelected', categoryName)
     navigate(`/Category/${categoryName}`)
   }
+  function getDeviceType() {
+    const width = window.innerWidth;
+    if (width < 768) {
+        return 'Mobile';
+    } else if (width >= 768 && width < 1024) {
+        return 'Tablet';
+    } else {
+        return 'Desktop';
+    }
+}
+
+// Usage example
+const deviceType = getDeviceType();
+console.log('Device type:', deviceType);
+deviceType==='Mobile'? options.perPage = 2:options.perPage = 4
   return (
     <div className=" w-full flex justify-center">
         <Splide  
