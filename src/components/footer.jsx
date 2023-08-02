@@ -21,7 +21,9 @@ const Footer = () => {
   </div>
 
 </div>
-            <footer className="grid grid-cols-1 md:grid-cols-2 gap-2.5 w-full h-64 p-5 max-w-7xl mx-auto">
+            <div className="flex flex-col gap-2">
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 w-full h-64 p-5 max-w-7xl mx-auto">
              <div>
                     <h2>BESK MERCHANTS</h2>
                     <div>
@@ -76,15 +78,16 @@ const Footer = () => {
                         </ul>
                     </div>
              </div>
+</div>
 
-            </footer>
-            <div className="w-full flex justify-between p-4 max-w-7xl mx-auto">
+            </div>
+       <div className="w-full flex justify-between p-4 max-w-7xl mt-[240px] md:mt-2  mx-auto">
             <h4>@ Copyright:2023 BESK MERCHANTS </h4>
             <div className="flex gap-2.5 text-lg text-gray-500">
                 <p>Privacy Policy | Terms & Conditions </p>
                 <div></div>
             </div>
-            </div>
+            </div>     
             
         </div>
      );

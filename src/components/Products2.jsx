@@ -62,7 +62,6 @@ return y
   const deviceType = getDeviceType();
   console.log('Device type:', deviceType);
   deviceType==='Mobile'? options.perPage = 2:options.perPage = 4
-  deviceType==='Tablet'? options.perPage = 3:options.perPage = 4
     return ( 
         <div className="w-screen box-border md:w-full flex justify-center">
         <div className="bg-gray-100 p-5 max-w-7xl mx-auto">
@@ -84,20 +83,20 @@ return y
             </div>
 
             <Splide  
-        options={options}
-        
+        options={options}     
         hasTrack={true}
-        className='w-full h-full flex relative p-0 m-0 bg-white'>
+        className='w-screen box-border md:w-full h-full flex relative lg:p-0 m-0 bg-white'>
    
                {products.filter((product)=>product.device ===item).slice(0, 10).map((product)=> (
                   <SplideSlide   key={product._id}
-                  className={`cursor-pointer  bg-white duration-75 rounded-sm hover:shadow-xl mx-2 shadow-gray-500/50 aspect-square`} 
+                  className={`cursor-pointer bg-white duration-75 rounded-sm hover:shadow-xl mx-2 shadow-gray-500/50 aspect-square`} 
                    onClick={event=>selectProduct(event, product._id)}>
                    
                    <div 
-      className="w-full h-3/4 object-cover bg-no-repeat"
-      style={{backgroundImage: `url(${product.img})`}}
+      className="w-full aspect-square object-contain  bg-no-repeat"
+      // style={{backgroundImage: `url(${product.img})`}}
    >
+      <img src={product.img} alt={product.img} className='w-full ' />
    </div> 
                   <div className="p-4 font-semibold">
                   <p className='text-sm md:text-md'>{product.title}</p>

@@ -28,36 +28,36 @@ const HeroSection = () => {
      
   <SplideSlide className='w-full bg-red-300'>
   <div 
-       className="flex flex-col justify-center items-center  h-full rounded-md bg-gradient-to-r from-gray-300 to-slate-500 ">
-        <h2>We Provide The Best Products</h2>
+       className="flex flex-col justify-center items-center  h-full rounded-md bg-gradient-to-r from-gray-300 to-slate-500  lg:text-lg">
+        <h2 className='text-lg md:text-xl lg:text-2xl'>We Provide The Best Products</h2>
        </div>
   </SplideSlide>
   <SplideSlide>
   
   <div 
        className="flex flex-col justify-center items-center w-full h-full rounded-md bg-gradient-to-r from-gray-300 to-slate-500 ">
-        <h2>Dedicated to our customers</h2>
+        <h2 className='text-lg md:text-xl lg:text-2xl'>Dedicated to our customers</h2>
        </div>
   </SplideSlide>
   <SplideSlide className='w-full bg-red-300'>
    
   <div 
        className="flex flex-col justify-center items-center w-full h-full rounded-md bg-gradient-to-r from-gray-300 to-slate-500 ">
-        <h2>Fast & WorldWide Shipment</h2>
+        <h2 className='text-lg md:text-xl lg:text-2xl'>Fast & WorldWide Shipment</h2>
        </div>
   </SplideSlide>
   <SplideSlide>
    
   <div 
        className="flex flex-col justify-center items-center w-full h-full rounded-md bg-gradient-to-r from-gray-300 to-slate-500 ">
-        <h2>We offer both wholesale & Retail sales</h2>
+        <h2 className='text-lg md:text-xl lg:text-2xl'>We offer both wholesale & Retail sales</h2>
        </div>
  </SplideSlide>
   <SplideSlide>
    
   <div 
        className="flex flex-col justify-center items-center w-full h-full rounded-md bg-gradient-to-r from-gray-300 to-slate-500 ">
-        <h2>Contact Us for a personalized requests</h2>
+        <h2 className='text-lg md:text-xl lg:text-2xl'>Contact Us for a personalized requests</h2>
        </div>
  </SplideSlide>
 
