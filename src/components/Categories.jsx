@@ -3,9 +3,12 @@ import { allCategories }from "./data/categories";
 import { useNavigate } from 'react-router-dom';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
-import '@splidejs/react-splide/css';
-// // or other themes
-import '@splidejs/react-splide/css/default';
+// import '@splidejs/react-splide/css';
+// // // or other themes
+// import '@splidejs/react-splide/css/default';
+
+// or only core styles
+import '@splidejs/splide/css/core'
 
 const options = {
      type         : 'loop',
@@ -39,7 +42,7 @@ const deviceType = getDeviceType();
 console.log('Device type:', deviceType);
 deviceType==='Mobile'? options.perPage = 2:options.perPage = 4
   return (
-    <div className=" w-full flex justify-center">
+    <div className=" w-full flex justify-center mt-10 lg:mt-2">
         <Splide  
         options={options}
         hasTrack={true}
@@ -49,7 +52,7 @@ deviceType==='Mobile'? options.perPage = 2:options.perPage = 4
             categories && categories.map((category, id)=>(
         <SplideSlide
          onClick={()=>filteredCategoryPage(category.categoryName)}
-         className="cursor-pointer  bg-no-repeat bg-cover m-2 rounded-md overflow-hidden duration-75  hover:shadow-xl shadow-gray-500/50 h-64 flex items-end"   
+         className="cursor-pointer  bg-no-repeat bg-cover m-2 rounded-md overflow-hidden duration-75  hover:shadow-xl shadow-gray-500/50 h-36 lg:h-48 flex items-end"   
          style={{backgroundImage: `url(${category.img})`}}
          key={id}>
           
@@ -67,3 +70,5 @@ deviceType==='Mobile'? options.perPage = 2:options.perPage = 4
 }
 
 export default Categories
+
+

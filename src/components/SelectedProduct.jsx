@@ -41,7 +41,7 @@ const SelectedProduct = () => {
   const headers ={
     "Content-Type": "application/json"
   }
-  return fetch(`https://besk-merchants.netlify.app/.netlify/functions/api/api/payment/create-payment-intent-trial`,{
+  return fetch(`http://localhost:4000/api/payment/create-payment-intent-trial`,{
     method:"POST",
     headers,
     body:JSON.stringify(body)
@@ -56,12 +56,17 @@ const SelectedProduct = () => {
     console.log(error)
   })
  }
+ const item = [];
+ let prod ={...product, quantity}
+ product? item.push(prod) : []
+
+ console.log(item)
+
 
  const cart = useContext(CartContext);
 
  const [mpesaModal, setMpesaModal] = useState(false)
  const mpesaPay=()=>{
-  console.log("Event Fired")
   setMpesaModal(true)
   }
   const closeMpesa=()=>{
@@ -103,7 +108,7 @@ const SelectedProduct = () => {
       <MpesaModal
       toggleMpesa={closeMpesa}
       amount={product.price}
-      items={product.title}
+      items={item}
       />
       }
       

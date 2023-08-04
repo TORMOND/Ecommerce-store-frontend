@@ -61,13 +61,13 @@ const [searchCustomerDetails, setSearchCustomerDetails] = useState('');
          variants= {containerVariants}
          initial='hidden'
          animate='visible'
-         className='w-screen bg-[#00000071] fixed z-20 h-screen flex justify-center items-center box-border'
+         className='w-screen bg-[#00000071] fixed z-20 h-screen flex justify-center lg:items-center box-border'
          >
             <motion.div
              varaints= {boxVariants}
              initial='hidden'
              animate='visible'
-             className='rounded-lg flex flex-col p-2 bg-gray-50 w-[80%]  min-h-2/5 lg:w-[60%]'
+             className={`rounded-lg flex flex-col p-2 bg-gray-50 w-[80%]  min-h-2/5 lg:w-[60%] ${searchCustomerDetails==''? 'max-w-24':'max-w-[80vh'}`}
              >
                 <div className='w-full p-2 flex gap-2.5 justify-between items-center border-b border-b-gray-300'>
                 <div  className=' text-start px-2 flex gap-1.5 items-center w-5/6'>

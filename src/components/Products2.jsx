@@ -23,7 +23,7 @@ const options = {
 
 const Products = () => {
    
-     const { data:products, isPending, error } = useFetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/products/');
+     const { data:products, isPending, error } = useFetch('http://localhost:4000/api/Products/');
 
 let categories = [] 
 const findCategories =(products)=>{
@@ -63,8 +63,8 @@ return y
   console.log('Device type:', deviceType);
   deviceType==='Mobile'? options.perPage = 2:options.perPage = 4
     return ( 
-        <div className="w-screen box-border md:w-full flex justify-center">
-        <div className="bg-gray-100 p-5 max-w-7xl mx-auto">
+        <div className="w-full box-border md:w-full flex justify-center">
+        <div className="bg-gray-100 p-0  lg:p-5 max-w-7xl mx-auto">
 
                {isPending &&              
          <LoadingSection />        
@@ -85,18 +85,16 @@ return y
             <Splide  
         options={options}     
         hasTrack={true}
-        className='w-screen box-border md:w-full h-full flex relative lg:p-0 m-0 bg-white'>
+        className='w-screen box-border md:w-full h-full flex relative  p-0 m-0 bg-white'>
    
                {products.filter((product)=>product.device ===item).slice(0, 10).map((product)=> (
                   <SplideSlide   key={product._id}
                   className={`cursor-pointer bg-white duration-75 rounded-sm hover:shadow-xl mx-2 shadow-gray-500/50 aspect-square`} 
                    onClick={event=>selectProduct(event, product._id)}>
                    
-                   <div 
-      className="w-full aspect-square object-contain  bg-no-repeat"
-      // style={{backgroundImage: `url(${product.img})`}}
-   >
-      <img src={product.img} alt={product.img} className='w-full ' />
+       <div 
+      className="w-[80%] aspect-square object-contain  bg-no-repeat">
+      <img src={product.img} alt={product.img} className='w-full  object-contain' />
    </div> 
                   <div className="p-4 font-semibold">
                   <p className='text-sm md:text-md'>{product.title}</p>

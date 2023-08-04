@@ -20,6 +20,7 @@ const Cart = () => {
  
       const cart = useContext(CartContext);
       const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
+      console.log(cart.items)
       const [mpesaModal, setMpesaModal] = useState(false)
       const [city,setCity] = useState('');
       const [postalCode,setPostalCode] = useState('');
@@ -43,12 +44,12 @@ const Cart = () => {
 const checkout=()=>{
           const body ={
             items: cart.items, 
-            city,postalCode,streetAddress,country,
+            // city,postalCode,streetAddress,country,
           }
           const headers ={
             "Content-Type": "application/json"
           }
-          return fetch(`https://besk-merchants.netlify.app/.netlify/functions/api/api/payment/create-payment-intent-trial`,{
+          return fetch(`http://localhost:4000/api/payment/create-payment-intent`,{
             method:"POST",
             headers,
             body:JSON.stringify(body)
@@ -140,6 +141,7 @@ if (isSuccess) {
             <h3>{item.title}</h3>
 
             <p className='mt-3 font-semibold'>{item.brands}</p>
+            <p>StripeId{item.stripeId}</p>
          
  <div className="flex flex-col justify-between items-end">
            <h3 className='text-end'>${item.price}</h3>

@@ -168,3 +168,17 @@
   z-index: -1;
   transition: width 1s;
 }
+
+/* .splide__arrows{
+ visibility: hidden;
+}
+.splide__arrows:hover{
+  visibility: visible;
+} */
+
+.splide__arrows svg{
+  visibility: hidden;
+}
+.splide__arrows :hover svg{
+  visibility: visible;
+}

@@ -73,7 +73,7 @@ function getNumberOfProducts(){
                 cartProducts.map(
                     product =>
                     product._id === id                               
-                    ? { _id:product._id, title:product.title,img:product.img, price:product.price, quantity: product.quantity - 1 } // if statement is true
+                    ? { ...product, quantity: product.quantity - 1 } // if statement is true
                     : product                                       
                 )
             )

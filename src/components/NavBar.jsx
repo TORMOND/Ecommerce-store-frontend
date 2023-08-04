@@ -32,6 +32,9 @@ const cartPage =()=>{
 const signInUser =()=>{
   navigate('/LoginPage')
 }
+const homePage = ()=>{
+  navigate('/')
+}
 const handleLogout =()=>{
   logout();
 }
@@ -41,9 +44,24 @@ const searchProduct =() =>{
 
     return (
    <div className="flex flex-col bg-black w-full box-border top-0 fixed z-20 mb-10">
+    <div className='absolute z-20 ml-[70vw] lg:ml-[90vw] rounded-md mt-12 bg-white shadow-lg py-4 px-6 hidden'>
+    {
+            !user &&
+             <div className="cursor-pointer p-1 duration-75  outline-1 outline-purple-500" onClick={signInUser}>
+          <FontAwesomeIcon icon={faUser} className='my-0 mx-1.5' />
+            <span className="hidden lg:inline-block">Sign in</span>
+          </div>
+          }
+    
+    <div className="flex gap-2 cursor-pointer " onClick={handleLogout}>
+
+          <FontAwesomeIcon icon={faRightToBracket} size="lg" />
+            <p className="text-sm">Logout</p>
+          </div>
+    </div>
   
      <div className="flex items-center justify-between bg-black w-full  text-gray-50 py-2 px-4  box-border ">
-      <h2 className='text-lg'>BESK MERCHANTS</h2> 
+      <h2 className='text-lg cursor-pointer' onClick={homePage}>BESK MERCHANTS</h2> 
   
       <div className="flex gap-5 items-center max-w-7xl">
       <div className="">
@@ -73,10 +91,6 @@ const searchProduct =() =>{
          
           </div>
 
-          <div className="flex gap-2 cursor-pointer text-white" onClick={handleLogout}>
-          <FontAwesomeIcon icon={faRightToBracket} size="lg" />
-            <p className="text-sm">Logout</p>
-          </div>
 
           </div>
           }

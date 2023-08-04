@@ -3,22 +3,22 @@ import  { useState, useRef } from 'react';
 import { useLogout } from '../Hooks/useLogout';
 
 
-import { NavBar, Products, Footer, PopUps, Brands, HeroSection, Categories}from '../components';
+import { NavBar, Products, Footer, PopUps, Brands, HeroSection, Categories, HeroMobile}from '../components';
 import Producst2 from '../components/Products2';
 import Modal from '../components/Modal';
 
 const Home = () => {     
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [userBar, setUserBar] = useState(false)
-  const userProfileBar =useRef(null)
-  const { logout } = useLogout()
+  const [userBar, setUserBar] = useState(false);
+  const userProfileBar =useRef(null);
+  const { logout } = useLogout();
   const [show, setShow] = useState(false);
   const [brands, setBrands] = useState(false);
   const [contacts, setContacts] = useState(false);
   const ref = useRef(null);
-  const brands_ref = useRef(null)
+  const brands_ref = useRef(null);
 
 
 const signInUser =()=>{
@@ -92,12 +92,8 @@ const [search, setSearch] = useState('')
 }
 
 <HeroSection />
-{/* 
 
-<Carousel />
- */}
-
-<div className='grid grid-cols-2 md:grid-cols-4 gap-2.5 bg-white p-4'>
+{/* <div className='mt-10 lg:mt-2 grid grid-cols-2 md:grid-cols-4 gap-2.5 bg-white p-4'>
 <div className='text-align p-2 bg-purple-500 md:bg-white text-white md:text-black border-0 md:border-r md:border-r-gray-400 rounded-md'>
   <h3>Original Products</h3>
   <p className='hidden lg:flex'>We offer products of the best quality </p>
@@ -117,10 +113,11 @@ const [search, setSearch] = useState('')
   <h3>Fast & Worldwide Shipment</h3>
   <p className='hidden lg:flex'>We deliver the products to your location anywhere in the world</p>
 </div>
-</div>
+</div> */}
 
 <Categories />
 
+<HeroMobile />
 <Producst2 />
 {/* <Products /> */}
 

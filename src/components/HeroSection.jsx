@@ -1,9 +1,9 @@
 // FontAwesome
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
+// import '@splidejs/react-splide/css';
 
 // // or other themes
-import '@splidejs/react-splide/css/default';
+// import '@splidejs/react-splide/css/default';
 // import '@splidejs/react-splide/css/sea-green';
 
 // // or only core styles
@@ -19,7 +19,7 @@ const HeroSection = () => {
   
  
   return (
-    <div className='mt-10 pb-5 flex'> 
+    <div className='mt-10 pb-5 hidden lg:flex'> 
      <Splide  
      options={options}
      hasTrack={true}

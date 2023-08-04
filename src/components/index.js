@@ -8,6 +8,7 @@ import HeroSection from './HeroSection';
 import Categories from './Categories';
 import MpesaModal from './MpesaModal'
 import Carousel from './carousel/Carousel';
+import HeroMobile from './HeroMobile';
 
 
 export {
@@ -20,5 +21,6 @@ export {
     Categories,
     Modal,
     MpesaModal,
-    Carousel
+    Carousel,
+    HeroMobile
 }

@@ -32,7 +32,7 @@ const boxVariants={
         transition:{
             type:'spring',
             delay:0.5,
-            duration:30
+            duration:10
         }
     }
 }
@@ -41,13 +41,28 @@ const [phone, setCustomerPhone] = useState('');
 const [loading, setLoading]= useState(false);
 const [error, setError]= useState(false)
 const [success, setSuccess] = useState(false);
+
+console.log(items)
+let categories = [] 
+const findCategories =(products)=>{
+
+for(let i =0; i< products.length; i++){
+   categories.push(products[i]._id)
+}
+const y = Array.from(new Set(categories))
+return y
+}
+
+
+const itemIds = items? findCategories(items): []
+console.log(itemIds)
 const makepayment =async(amount)=>{
   setLoading(true)
   amount=1;
-  const response = await fetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/mpesaPayment/stk', {
+  const response = await fetch('https://2206-154-79-251-210.ngrok-free.app/api/mpesaPayment/stk', {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({phone,amount})
+    body: JSON.stringify({phone, itemIds, items})
 })
 
 const json = await response.json()
@@ -94,8 +109,8 @@ if(response.ok){
                     </button>
                 </div>
                
-                <div  className=' text-start px-2 flex gap-1.5 items-center w-full py-5  justify-center'>
-                    <p>Enter Phone Number:</p>
+                <div  className=' text-start px-2 flex flex-col  gap-1.5 items-center w-full py-5  justify-center'>
+                    <p className='text-start w-full'>Enter Phone Number:</p>
                     <input 
                     type='text' 
                     className='border-0 outline outline-gray-400 w-full py-1 px-2 rounded-sm mx-auto bg-gray-50 focus:outline-green-600 focus:outline-2'
