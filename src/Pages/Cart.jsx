@@ -49,7 +49,7 @@ const checkout=()=>{
           const headers ={
             "Content-Type": "application/json"
           }
-          return fetch(`http://localhost:4000/api/payment/create-payment-intent`,{
+          return fetch(`https://besk-merchants.netlify.app/.netlify/functions/api/api/payment/create-payment-intent`,{
             method:"POST",
             headers,
             body:JSON.stringify(body)
@@ -141,7 +141,7 @@ if (isSuccess) {
             <h3>{item.title}</h3>
 
             <p className='mt-3 font-semibold'>{item.brands}</p>
-            <p>StripeId{item.stripeId}</p>
+            {/* <p>StripeId{item.stripeId}</p> */}
          
  <div className="flex flex-col justify-between items-end">
            <h3 className='text-end'>${item.price}</h3>

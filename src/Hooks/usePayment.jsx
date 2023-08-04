@@ -12,7 +12,7 @@ export const usePayment = ()=>{
         setError(null)
         setIsLoading(true)
 
-        const response = await fetch('http://localhost:4000/api/payment/create-payment-intent', {
+        const response = await fetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/payment/create-payment-intent', {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({userId, amount, productId})

@@ -23,7 +23,7 @@ const options = {
 
 const Products = () => {
    
-     const { data:products, isPending, error } = useFetch('http://localhost:4000/api/Products/');
+     const { data:products, isPending, error } = useFetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/Products/');
 
 let categories = [] 
 const findCategories =(products)=>{

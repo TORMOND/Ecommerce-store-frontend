@@ -12,7 +12,7 @@ export const useSignUp = ()=>{
         setError(null)
         setIsLoading(true)
 
-        const response = await fetch('http://localhost:4000/api/user/signup', {
+        const response = await fetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/user/signup', {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({email, password, firstName, secondName})

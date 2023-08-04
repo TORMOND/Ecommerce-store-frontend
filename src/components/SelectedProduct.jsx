@@ -41,7 +41,7 @@ const SelectedProduct = () => {
   const headers ={
     "Content-Type": "application/json"
   }
-  return fetch(`http://localhost:4000/api/payment/create-payment-intent-trial`,{
+  return fetch(`https://besk-merchants.netlify.app/.netlify/functions/api/api/payment/create-payment-intent-trial`,{
     method:"POST",
     headers,
     body:JSON.stringify(body)

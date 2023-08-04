@@ -25,7 +25,7 @@ import { faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const Carousel = () => {
-  const { data:products, isPending, error } = useFetch('http://localhost:4000/api/products/');
+  const { data:products, isPending, error } = useFetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/products/');
   const navigate = useNavigate();
 
   const selectProduct = (event, id)=>{
