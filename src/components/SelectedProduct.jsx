@@ -113,8 +113,9 @@ const SelectedProduct = () => {
       }
       
      <div className="min-h-[80vh] flex flex-col">
-{isPending && <div className='w-screen box-border'>
-        <div className="loading-selected-product">
+{isPending &&
+ <div className='w-screen box-border'>
+        <div className="loading-selected-product flex flex-col lg:flex-row ">
         <div className="loading-image animate-pulse ">
 
 </div>
@@ -144,7 +145,7 @@ const SelectedProduct = () => {
 
 {error && <div>
         
-        <div className="loading-selected-product">
+        <div className="loading-selected-product flex flex-col lg:flex-row ">
         <div className="loading-image">
 
 </div>
@@ -174,12 +175,12 @@ const SelectedProduct = () => {
         </div>}
 
 {product && 
- <div className="flex gap-2 items-start w-full bg-white min-h-screen max-w-7xl mx-auto">
+ <div className="flex flex-col lg:flex-row gap-2 items-start w-full bg-white min-h-screen max-w-7xl mx-auto">
       
-<div className="w-2/5 top-36 sticky object-cover h-5/6">
+<div className="w-full lg:w-2/5 top-5 lg:top-36 h-3/5 lg:sticky object-contain  lg:h-5/6 ">
 <img src={product.img} alt={product.title} className='h-full w-full' />
 </div>
-<div className='w-3/5 flex flex-col lg:flex-row gap-2.5 '>
+<div className='w-full lg:w-3/5 flex flex-col lg:flex-row gap-2.5 px-4'>
 
 <div className="w-full lg:w-3/5 flex flex-col justify-start mt-5 text-start">
 <h2 className='product-title'>{product.title}</h2>
@@ -197,7 +198,7 @@ const SelectedProduct = () => {
     </ul>
 </div>
 </div>
-<div className="w-full lg:w-2/5 top-36 sticky mt-5 rounded-sm border border-gray-300 flex flex-col gap-5 p-4 text-start ">
+<div className="w-full lg:w-2/5 top-36 lg:sticky mt-5 rounded-sm border border-gray-300 flex flex-col gap-5 p-4 text-start ">
 <h3 className='product-price'>${product.price*quantity}</h3>
  
 {product.stripeId}

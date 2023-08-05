@@ -11,9 +11,9 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { CartContext } from "../Context/CartContext";
 import { useContext } from "react";
 
-const NavBar = ({ categories, userProfile, handleBrands, handleContacts, handleOffers, search, setSearch, toggleSearch}) => {
-  const [items] = useState(JSON.parse(localStorage.getItem('items')) || []);
-
+const NavBar = ({ categories, handleBrands, handleContacts, handleOffers, search, setSearch, toggleSearch}) => {
+  
+  const [userBar, setUserBar] = useState(false);
   const navigate = useNavigate();
   const {user} = useAuthContext();
   const cart = useContext(CartContext);
@@ -21,7 +21,7 @@ const NavBar = ({ categories, userProfile, handleBrands, handleContacts, handleO
 
 const  cartValue =useRef();
 const cartPage =()=>{
-  if(items.length > 0){
+  if(cart.items.length > 0){
     navigate('/cart');
   }else{
     alert('Cart is Empty');
@@ -41,25 +41,28 @@ const handleLogout =()=>{
 const searchProduct =() =>{
  
 }
-
+const userProfile = () =>{
+  setUserBar(!userBar)
+}
     return (
    <div className="flex flex-col bg-black w-full box-border top-0 fixed z-20 mb-10">
-    <div className='absolute z-20 ml-[70vw] lg:ml-[90vw] rounded-md mt-12 bg-white shadow-lg py-4 px-6 hidden'>
+  {userBar &&  <div className='absolute z-20 ml-[70vw] lg:ml-[86vw] rounded-md mt-12 bg-white shadow-lg py-4 px-6 '>
     {
             !user &&
-             <div className="cursor-pointer p-1 duration-75  outline-1 outline-purple-500" onClick={signInUser}>
+             <button className="cursor-pointer p-1 duration-75 bg-purple-500 rounded-md  outline-1 outline-purple-500 flex gap-1 items-center px-4 py-2 text-white" onClick={signInUser}>
           <FontAwesomeIcon icon={faUser} className='my-0 mx-1.5' />
             <span className="hidden lg:inline-block">Sign in</span>
-          </div>
+          </button>
           }
     
-    <div className="flex gap-2 cursor-pointer " onClick={handleLogout}>
+    {user && <div className="flex gap-2 cursor-pointer " onClick={handleLogout}>
 
           <FontAwesomeIcon icon={faRightToBracket} size="lg" />
             <p className="text-sm">Logout</p>
           </div>
+}
     </div>
-  
+}
      <div className="flex items-center justify-between bg-black w-full  text-gray-50 py-2 px-4  box-border ">
       <h2 className='text-lg cursor-pointer' onClick={homePage}>BESK MERCHANTS</h2> 
   
@@ -76,9 +79,10 @@ const searchProduct =() =>{
           </div>
           {
             !user &&
-             <div className="cursor-pointer p-1 duration-75 hover:text-purple-200 outline-1 outline-purple-500" onClick={signInUser}>
+             <div className="cursor-pointer p-1 duration-75 hover:text-purple-200 outline-1 outline-purple-500">
           <FontAwesomeIcon icon={faUser} className='my-0 mx-1.5' />
-            <span className="hidden lg:inline-block">Sign in</span>
+          <FontAwesomeIcon icon={faCaretDown}  className='my-0 mx-1.5' onClick={userProfile}   />
+            {/* <span className="hidden lg:inline-block">Sign in</span> */}
           </div>
           }
          

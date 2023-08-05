@@ -32,7 +32,7 @@ const Modal = ({toggleSearch})=>{
             transition:{
                 type:'spring',
                 delay:0.5,
-                duration:30
+                duration:2
             }
         }
     }
@@ -64,7 +64,7 @@ const [searchCustomerDetails, setSearchCustomerDetails] = useState('');
          className='w-screen bg-[#00000071] fixed z-20 h-screen flex justify-center lg:items-center box-border'
          >
             <motion.div
-             varaints= {boxVariants}
+             variants= {boxVariants}
              initial='hidden'
              animate='visible'
              className={`rounded-lg flex flex-col p-2 bg-gray-50 w-[80%]  min-h-2/5 lg:w-[60%] ${searchCustomerDetails==''? 'max-w-24':'max-w-[80vh'}`}

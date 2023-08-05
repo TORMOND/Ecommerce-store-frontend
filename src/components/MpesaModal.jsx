@@ -32,7 +32,7 @@ const boxVariants={
         transition:{
             type:'spring',
             delay:0.5,
-            duration:10
+            duration:2
         }
     }
 }
@@ -59,7 +59,7 @@ console.log(itemIds)
 const makepayment =async(amount)=>{
   setLoading(true)
   amount=1;
-  const response = await fetch('https://2206-154-79-251-210.ngrok-free.app/api/mpesaPayment/stk', {
+  const response = await fetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/mpesaPayment/stk/', {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({phone, itemIds, items})

@@ -32,7 +32,7 @@ function getNumberOfProducts(){
 
     function getProductQuantity(id) {
         const quantity = cartProducts.find(product => product._id === id)?.quantity;
-        
+ 
         if (quantity === undefined) {
             return 0;
         }
@@ -41,8 +41,9 @@ function getNumberOfProducts(){
     }
 
     function addOneToCart(product) {
+        // if(cartProducts.length === 0) return localStorage.setItem('items', [])
         const quantity = getProductQuantity(product._id);
-
+         
         if (quantity === 0) {  // product is not in cart
           setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
             localStorage.setItem('items', JSON.stringify(cartProducts));
