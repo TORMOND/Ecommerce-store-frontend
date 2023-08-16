@@ -9,6 +9,8 @@ import Categories from './Categories';
 import MpesaModal from './MpesaModal'
 import Carousel from './carousel/Carousel';
 import HeroMobile from './HeroMobile';
+import Cancel from "./Cancel";
+import Success from './Success';
 
 
 export {
@@ -22,5 +24,7 @@ export {
     Modal,
     MpesaModal,
     Carousel,
-    HeroMobile
+    HeroMobile,
+    Cancel,
+    Success
 }

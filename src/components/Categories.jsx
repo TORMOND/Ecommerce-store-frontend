@@ -3,11 +3,6 @@ import { allCategories }from "./data/categories";
 import { useNavigate } from 'react-router-dom';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
-// import '@splidejs/react-splide/css';
-// // // or other themes
-// import '@splidejs/react-splide/css/default';
-
-// or only core styles
 import '@splidejs/splide/css/core'
 
 const options = {
@@ -19,6 +14,7 @@ const options = {
    };
 
 const Categories = () => {
+  
   const [categories] = useState(allCategories)
   const navigate = useNavigate()
 

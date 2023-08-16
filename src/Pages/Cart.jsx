@@ -8,7 +8,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 // components
-import {Footer, NavBar, MpesaModal, Modal } from "../components";
+import {Footer, NavBar, MpesaModal, Modal, Cancel, Success } from "../components";
 
 
 const Cart = () => {
@@ -28,7 +28,7 @@ const Cart = () => {
       const [country,setCountry] = useState('');
       const [isSuccess,setIsSuccess] = useState(false);
       const [isModal, setIsModal ] = useState(false);
-      const [canceled, setIsCanceled] = useState(false)
+      const [canceled, setIsCanceled] = useState(false);
       useEffect(() => {
         if (typeof window === 'undefined') {
           return;
@@ -71,40 +71,14 @@ const closeMpesa=()=>{
 const toggleSearch =()=>{
   setIsModal(!isModal)
 }
-if (isSuccess) {
-  return (
-    <>
-      <NavBar 
- signInUser={signInUser} 
- toggleSearch={toggleSearch}
- />
-      <div className="">
-        <div className="">
-          <div className="">
-            <h1>Thanks for your order!</h1>
-            <p>We will email you when your order will be sent.</p>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+const toggleSuccess=()=>{
+  setIsSuccess(false);
+
+}
+const toggleCancel=()=>{
+  setIsCanceled(false);
 }
 
- if (canceled) {
-    return (
-      <>
-
-        <div className="">
-          <div className="">
-            <div className="">
-              <h1>Order canceled</h1>
-              <p>.</p>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
     return ( 
     <div>
       {mpesaModal &&
@@ -118,6 +92,16 @@ if (isSuccess) {
          <Modal 
          toggleSearch={toggleSearch}
          />
+      }
+      {isSuccess &&
+          <Success
+     toggleSuccess={toggleSuccess}
+           />
+      }
+      {canceled &&
+      <Cancel
+      toggleCancel={toggleCancel}
+       />
       }
         <div className="cart-page">
  <NavBar 
@@ -137,11 +121,11 @@ if (isSuccess) {
                  <img src={item.img} alt={item.img} className='object-cover w-full' />
             </div>
          
-            <div className="text-start py-2.5 px-1.5  col-end-3 ">
+            <div className="text-start py-2.5 px-1.5 col-end-3 ">
             <h3>{item.title}</h3>
 
             <p className='mt-3 font-semibold'>{item.brands}</p>
-            {/* <p>StripeId{item.stripeId}</p> */}
+            <p className="text-sm">{item.stripeId}</p>
          
  <div className="flex flex-col justify-between items-end">
            <h3 className='text-end'>${item.price}</h3>

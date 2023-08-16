@@ -45,7 +45,7 @@ const allCategories = [
            id: 6,
            img:buildingmaterials
           },
-          {categoryName: "Furniture",
+          {categoryName: "furniture",
            items: 45,
            id: 7,
            img:furniture
@@ -70,7 +70,7 @@ const allCategories = [
            id: 11,
            img:stationary
           },
-          {categoryName: "Clothing",
+          {categoryName: "Clothes",
            items: 45,
            id: 12,
            img:clothes

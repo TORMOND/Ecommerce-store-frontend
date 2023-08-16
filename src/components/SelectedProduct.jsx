@@ -7,9 +7,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 import MpesaModal from './MpesaModal';
+import Cancel from "./Cancel";
+import Success from './Success';
 
 const SelectedProduct = () => {
   const id = localStorage.getItem('id');
+    const [city,setCity] = useState('');
+    const [postalCode,setPostalCode] = useState('');
+    const [streetAddress,setStreetAddress] = useState('');
+    const [country,setCountry] = useState('');
+
   const [canceled, setIsCanceled] = useState(false)
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -37,6 +44,7 @@ const SelectedProduct = () => {
   const body ={
     id:stripeId,
     quantity:quantity,
+    // city,postalCode,streetAddress,country,
   }
   const headers ={
     "Content-Type": "application/json"
@@ -72,36 +80,14 @@ const SelectedProduct = () => {
   const closeMpesa=()=>{
     setMpesaModal(false)
   }
-  if (isSuccess) {
-    return (
-      <>
-
-        <div className="">
-          <div className="">
-            <div className="">
-              <h1>Thanks for your order!</h1>
-              <p>We will email you when your order will be sent.</p>
-            </div>
-          </div>
-        </div>
-      </>
-    );
+  const toggleSuccess=()=>{
+    setIsSuccess(false);
+  
   }
-  if (canceled) {
-    return (
-      <>
-
-        <div className="">
-          <div className="">
-            <div className="">
-              <h1>Order canceled</h1>
-              <p>.</p>
-            </div>
-          </div>
-        </div>
-      </>
-    );
+  const toggleCancel=()=>{
+    setIsCanceled(false);
   }
+   
     return ( 
        <div>
  {mpesaModal && product &&
@@ -111,7 +97,16 @@ const SelectedProduct = () => {
       items={item}
       />
       }
-      
+      {isSuccess &&
+          <Success
+     toggleSuccess={toggleSuccess}
+           />
+      }
+      {canceled &&
+      <Cancel
+      toggleCancel={toggleCancel}
+       />
+      }
      <div className="min-h-[80vh] flex flex-col">
 {isPending &&
  <div className='w-screen box-border'>
@@ -211,12 +206,40 @@ const SelectedProduct = () => {
           <button onClick={decrementQuantity} disabled={quantity===1} className="p-2 border w-10">-</button>
 
           </div>
-  
+          <div className="flex flex-col gap-2 mt-4">
+                <input type="text"
+                       placeholder="City"
+                       value={city}
+                       name="city"
+                       onChange={ev => setCity(ev.target.value)}
+                       className="outline outline-gray-400 p-2"
+                       />
+                <input type="text"
+                       placeholder="Postal Code"
+                       value={postalCode}
+                       name="postalCode"
+                       onChange={ev => setPostalCode(ev.target.value)}
+                       className="outline outline-gray-400 p-2"
+                       />
+              <input type="text"
+                     placeholder="Street Address"
+                     value={streetAddress}
+                     name="streetAddress"
+                     onChange={ev => setStreetAddress(ev.target.value)}
+                     className="outline outline-gray-400 p-2"
+                     />
+              <input type="text"
+                     placeholder="Country"
+                     value={country}
+                     name="country"
+                     onChange={ev => setCountry(ev.target.value)}
+                     className="outline outline-gray-400 p-2"
+                     />
+ </div>
    <button onClick={()=>cart.addOneToCart(product)} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '
    >
       <FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />Add to Cart</button>
-
   <button onClick={()=>makePayment(product.stripeId)} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '
    >

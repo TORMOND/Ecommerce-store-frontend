@@ -55,14 +55,26 @@ return y
 
 
 const itemIds = items? findCategories(items): []
+
+let prods = []
+const findProducts =(products)=>{
+  for(let i =0; i< products.length; i++){
+    prods.push(products[i].title)
+ }
+ const newProducts = Array.from(new Set(categories))
+ return newProducts
+}
+
+const itemTitles = items? findProducts(items): []
+
 console.log(itemIds)
 const makepayment =async(amount)=>{
   setLoading(true)
-  amount=1;
-  const response = await fetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/mpesaPayment/stk/', {
+  // amount=1;
+  const response = await fetch('http://localhost:4000/api/mpesaPayment/stk/', {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({phone, itemIds, items})
+    body: JSON.stringify({phone, itemIds,items, itemTitles})
 })
 
 const json = await response.json()
@@ -88,7 +100,13 @@ if(response.ok){
          className='w-screen bg-[#00000071] fixed z-20 h-screen flex justify-center items-center box-border'
          >
           {success && 
+
 <div className='flex items-center justify-center rounded-lg flex-col p-2 bg-gray-50 w-[80%]  min-h-2/5 lg:w-[60%] pb-5'>
+<div className='w-full p-2 flex gap-2.5 justify-end items-center border-b border-b-gray-300'>
+                    <button onClick={toggleMpesa} className='border border-gray-300 rounded-sm py-1 px-1.5'>
+                    <FontAwesomeIcon icon={faXmark} size="lg" />
+                    </button>
+                </div>
 <p>Thank you for shopping with Us we shall contact  you via message  on about the product delivery</p>
 </div>
 }

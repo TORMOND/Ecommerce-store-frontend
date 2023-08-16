@@ -21,6 +21,8 @@ const options = {
      perPage: 4,
    };
 
+  //  import Categories from './Categories';
+
 const Products = () => {
    
      const { data:products, isPending, error } = useFetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/Products/');
@@ -60,7 +62,7 @@ return y
 
   // Usage example
   const deviceType = getDeviceType();
-  console.log('Device type:', deviceType);
+  console.log('Device type:', deviceType); 
   deviceType==='Mobile'? options.perPage = 2:options.perPage = 4
     return ( 
         <div className="w-full box-border md:w-full flex justify-center">
@@ -73,7 +75,10 @@ return y
              <LoadingSection />
                }
 
+
+
             {products &&
+
             items.map((item)=>(
                 <div key={products._id} className="w-full my-4 rounded-sm overflow-hidden shadow-md shadow-gray-400/50">
              <div className="flex gap-3 py-2 px-4 items-center bg-purple-400 justify-between">

@@ -41,7 +41,7 @@ function getNumberOfProducts(){
     }
 
     function addOneToCart(product) {
-        // if(cartProducts.length === 0) return localStorage.setItem('items', [])
+        localStorage.setItem('items', JSON.stringify(cartProducts));
         const quantity = getProductQuantity(product._id);
          
         if (quantity === 0) {  // product is not in cart

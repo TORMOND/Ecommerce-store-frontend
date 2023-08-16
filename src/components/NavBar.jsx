@@ -51,7 +51,7 @@ const userProfile = () =>{
             !user &&
              <button className="cursor-pointer p-1 duration-75 bg-purple-500 rounded-md  outline-1 outline-purple-500 flex gap-1 items-center px-4 py-2 text-white" onClick={signInUser}>
           <FontAwesomeIcon icon={faUser} className='my-0 mx-1.5' />
-            <span className="hidden lg:inline-block">Sign in</span>
+            <span className="text-sm">Sign in</span>
           </button>
           }
     
@@ -82,7 +82,6 @@ const userProfile = () =>{
              <div className="cursor-pointer p-1 duration-75 hover:text-purple-200 outline-1 outline-purple-500">
           <FontAwesomeIcon icon={faUser} className='my-0 mx-1.5' />
           <FontAwesomeIcon icon={faCaretDown}  className='my-0 mx-1.5' onClick={userProfile}   />
-            {/* <span className="hidden lg:inline-block">Sign in</span> */}
           </div>
           }
          
