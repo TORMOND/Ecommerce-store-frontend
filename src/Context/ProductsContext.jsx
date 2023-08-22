@@ -15,7 +15,6 @@ export function ProductProvider({children}) {
 
     const setProducts=(data)=>{
         setNewProducts(data)
-        // console.log(data)
     }
     const setFilteredItems=(data)=>{
         setFilteredProducts(data)
@@ -28,8 +27,8 @@ export function ProductProvider({children}) {
         setFilteredItems:setFilteredItems,
         setProducts:setProducts,
     }
-    console.log(contextValue.items)
     // console.log(contextValue.items)
+
     return (
         <ProductsContext.Provider value={contextValue}>
             {children}

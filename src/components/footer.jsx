@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+
+import { mastercard, visacard,  MPESA} from '../assets';
 const Footer = () => {
     const navigate = useNavigate()
     const generateForm=()=>{
@@ -62,10 +64,10 @@ const Footer = () => {
                 <div>
                 <h3>COMPANY</h3>
                         <ul>
-                            <li>List</li>
-                            <li>List</li>
-                            <li>List</li>
-                            <li>List</li>
+                            <li>Terms & Conditions</li>
+                            <li>Return Policy</li>
+                            <li>Nairobi Kenya</li>
+                            <li></li>
                         </ul>
                     </div>
                     <div>
@@ -73,19 +75,23 @@ const Footer = () => {
                         <ul>
                             <li>Customer Service</li>
                             <li>Legal & Privacy</li>
-                            <li>List</li>
-                            <li>List</li>
+                            <li></li>
+                            <li></li>
                         </ul>
                     </div>
              </div>
 </div>
 
             </div>
-       <div className="w-full flex flex-col md:flex-row justify-between p-4 max-w-7xl mt-[240px] md:mt-2  mx-auto">
+       <div className="w-full flex flex-col md:flex-row justify-between p-4 max-w-7xl mt-[240px] md:mt-2  mx-auto items-center">
             <h4>@ Copyright:2023 BESK MERCHANTS </h4>
-            <div className="flex gap-2.5 text-lg text-gray-500">
+            <div className="flex gap-2.5 font-semibold text-gray-500 items-center">
                 <p>Privacy Policy | Terms & Conditions </p>
-                <div></div>
+                <div className='flex flex-col md:flex-row gap-2 items-center'>
+                    <img src={mastercard} alt={mastercard} />
+                    <img src={visacard} alt={visacard} className='h-20' />
+                    <img src={MPESA} alt={MPESA} className='h-8' />
+                </div>
             </div>
             </div>     
             

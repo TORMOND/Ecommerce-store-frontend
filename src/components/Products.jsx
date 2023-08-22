@@ -102,30 +102,7 @@ const Products = () => {
              <h3>PCs</h3>  
               </div>}
            
-            <div className="grid  gap-2.5 grid-cols-2  lg:grid-cols-4">
-               
-            {products && products.filter((product)=> product.device ==="PC").map((product)=> (
-            <div   key={product._id}>
-                  <div className="cursor-pointer bg-white duration-75 rounded-sm hover:shadow-xl shadow-gray-500/50 px-4"
-                   key={product._id} 
-                  //  onClick={event=>selectProduct(event, product._id)}
-                   >
-         <a href="https://www.amazon.com/gp/product/B09JF9WMR9/ref=ox_sc_act_image_1?smid=ATVPDKIKX0DER&psc=1" rel="noreferrer" target="_blank">
-                  <div className="product-image">
-                   <img src={product.img} alt={product.img} />  
-                  </div> 
-                  <div className="p-4">
-                  <p className='Product-title'>{product.title}</p>
-                  
-                  <span>${product.price}</span>
-                  
-                  </div>
-                  </a>
-               </div>
-            </div>
-               ))}   
-               
-            </div>
+           
             
            
         </div>

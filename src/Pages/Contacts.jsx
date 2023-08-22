@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 import { slideIn } from "../components/utils/motion";
 import { NavBar } from '../components';
+import { backend } from "../components/data/url";
 
 const Contacts = () => {
 
@@ -34,7 +35,7 @@ const Contacts = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     setLoading(true);
-    const response = await fetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/Feedback/postFeedback',{
+    const response = await fetch(`${backend}/Feedback/postFeedback`,{
       method: 'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({userName, email, details, phoneNo})

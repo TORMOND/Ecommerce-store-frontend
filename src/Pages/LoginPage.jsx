@@ -54,7 +54,7 @@ const LoginPage = () => {
           </div>
           }
          
-       <button onClick={submit} className="border-0 py-2.5 px-6 rounded-md bg-purple-500 w-44 text-white m-auto" disabled={isLoading}>Log in</button>
+       <button onClick={submit} className="border-0 py-2.5 px-6 rounded-md bg-purple-500 w-44 text-white m-auto cursor-pointer" disabled={isLoading}>Log in</button>
         <span onClick={forgotPassword} className='text-blue-500 cursor-pointer hover:underline underline-offset-4 '>forgot Password?</span>
 
           </form>

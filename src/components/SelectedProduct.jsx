@@ -9,13 +9,16 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import MpesaModal from './MpesaModal';
 import Cancel from "./Cancel";
 import Success from './Success';
+import { backend } from './data/url';
 
 const SelectedProduct = () => {
   const id = localStorage.getItem('id');
+  const KES = localStorage.getItem('USD_KSH');
     const [city,setCity] = useState('');
     const [postalCode,setPostalCode] = useState('');
     const [streetAddress,setStreetAddress] = useState('');
     const [country,setCountry] = useState('');
+
 
   const [canceled, setIsCanceled] = useState(false)
   useEffect(() => {
@@ -30,26 +33,30 @@ const SelectedProduct = () => {
       setIsCanceled(true);
     }
   }, []);
-   const {data:product, isPending, error} = useFetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/products/' + id);
+   const {data:product, isPending, error} = useFetch(`${backend}/products/${id}`);
    const [isSuccess,setIsSuccess] = useState(false);
    let [quantity, setQuantity] = useState(1);
    
    const incrementQuantity=()=>{
-    setQuantity(quantity++)
+    setQuantity(quantity+1)
    }
    const decrementQuantity=()=>{
-    setQuantity(quantity--)
+    setQuantity(quantity-1)
    }
- const makePayment = (stripeId)=>{
+ const makePayment = (product)=>{
   const body ={
-    id:stripeId,
+    id:product.stripeId,
+    prod_id:id,
     quantity:quantity,
-    // city,postalCode,streetAddress,country,
+    price:product.price,
+    name:product.title
   }
+  const purchasedProduct = body;
+  localStorage.setItem('purchase', purchasedProduct)
   const headers ={
     "Content-Type": "application/json"
   }
-  return fetch(`https://besk-merchants.netlify.app/.netlify/functions/api/api/payment/create-payment-intent-trial`,{
+  return fetch(`${backend}/payment/create-payment-intent-trial`,{
     method:"POST",
     headers,
     body:JSON.stringify(body)
@@ -58,6 +65,7 @@ const SelectedProduct = () => {
 }).then((response) => {
     if(response.url) {
         window.location.assign(response.url); // Forwarding user to Stripe
+        localStorage.setItem('session_id', response.session_id) 
     }
   
 }).catch(error=>{
@@ -65,14 +73,10 @@ const SelectedProduct = () => {
   })
  }
  const item = [];
- let prod ={...product, quantity}
+ let prod ={...product, quantity,
+  city,postalCode,streetAddress,country,}
  product? item.push(prod) : []
-
- console.log(item)
-
-
  const cart = useContext(CartContext);
-
  const [mpesaModal, setMpesaModal] = useState(false)
  const mpesaPay=()=>{
   setMpesaModal(true)
@@ -82,18 +86,18 @@ const SelectedProduct = () => {
   }
   const toggleSuccess=()=>{
     setIsSuccess(false);
-  
   }
   const toggleCancel=()=>{
     setIsCanceled(false);
   }
+
    
     return ( 
        <div>
  {mpesaModal && product &&
       <MpesaModal
       toggleMpesa={closeMpesa}
-      amount={product.price}
+      amount={Math.ceil(product.price*KES)}
       items={item}
       />
       }
@@ -173,7 +177,7 @@ const SelectedProduct = () => {
  <div className="flex flex-col lg:flex-row gap-2 items-start w-full bg-white min-h-screen max-w-7xl mx-auto">
       
 <div className="w-full lg:w-2/5 top-5 lg:top-36 h-3/5 lg:sticky object-contain  lg:h-5/6 ">
-<img src={product.img} alt={product.title} className='h-full w-full' />
+<img src={product.img} alt={product.title} className='h-full w-[80vh]' />
 </div>
 <div className='w-full lg:w-3/5 flex flex-col lg:flex-row gap-2.5 px-4'>
 
@@ -181,7 +185,34 @@ const SelectedProduct = () => {
 <h2 className='product-title'>{product.title}</h2>
 <p className='product-brand'>Brand:{product.brands}</p>
 
-<h3 className='product-price'>${product.price}</h3>
+<h3 className='product-price'>${product.price} || KSH{Math.ceil(product.price*KES)}</h3>
+
+{/* {product.color &&
+<ul className='my-2'>
+  <li className='flex gap-2'>
+    <p className=''>Color: </p>
+    color.map((color)=> (
+      <button className=''key={color}>
+      {color}
+    </button>
+    ))
+    
+    
+    </li>
+</ul>
+} */}
+
+{product.size &&
+<ul className='my-2'>
+  <li className='flex gap-2'>
+    <p className=''>Size: </p>
+    <button className=''>
+      {product.size}
+    </button>
+    
+    </li>
+</ul>
+}
 
 <div className="details">
     <h3>About this item</h3>
@@ -194,9 +225,9 @@ const SelectedProduct = () => {
 </div>
 </div>
 <div className="w-full lg:w-2/5 top-36 lg:sticky mt-5 rounded-sm border border-gray-300 flex flex-col gap-5 p-4 text-start ">
-<h3 className='product-price'>${product.price*quantity}</h3>
+<h3 className='product-price'>${product.price*quantity} || KSH{Math.ceil(product.price*KES*quantity)}</h3>
  
-{product.stripeId}
+{/* <p className='text-xs'>{product.stripeId}</p> */}
 
 <div className="flex flex-col gap-5 py-2.5 px-4 ">
 <div className="flex gap-2 item-center">
@@ -213,6 +244,7 @@ const SelectedProduct = () => {
                        name="city"
                        onChange={ev => setCity(ev.target.value)}
                        className="outline outline-gray-400 p-2"
+                       required 
                        />
                 <input type="text"
                        placeholder="Postal Code"
@@ -220,6 +252,7 @@ const SelectedProduct = () => {
                        name="postalCode"
                        onChange={ev => setPostalCode(ev.target.value)}
                        className="outline outline-gray-400 p-2"
+                       required 
                        />
               <input type="text"
                      placeholder="Street Address"
@@ -227,6 +260,7 @@ const SelectedProduct = () => {
                      name="streetAddress"
                      onChange={ev => setStreetAddress(ev.target.value)}
                      className="outline outline-gray-400 p-2"
+                     required 
                      />
               <input type="text"
                      placeholder="Country"
@@ -234,13 +268,14 @@ const SelectedProduct = () => {
                      name="country"
                      onChange={ev => setCountry(ev.target.value)}
                      className="outline outline-gray-400 p-2"
+                     required 
                      />
  </div>
    <button onClick={()=>cart.addOneToCart(product)} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '
    >
       <FontAwesomeIcon icon={faCartShopping}  className="shoppingCart" />Add to Cart</button>
-  <button onClick={()=>makePayment(product.stripeId)} 
+  <button onClick={()=>makePayment(product)} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '
    >
     Buy Now

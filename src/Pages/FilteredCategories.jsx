@@ -5,10 +5,11 @@
 
 import { useNavigate} from 'react-router-dom';
 import LoadingSection from '../components/LoadingSection';
+import { backend } from "../components/data/url";
 
 const FilteredCategoryPage = () => { 
    const category =localStorage.getItem('categorySelected')
-    const { data:products, isPending, error } = useFetch('https://besk-merchants.netlify.app/.netlify/functions/api/api/products/getFilteredProducts/'+category);
+    const { data:products, isPending, error } = useFetch(`${backend}/products/getFilteredProducts/${category}`);
   
      const navigate = useNavigate();
      const selectProduct = (event, id)=>{
@@ -28,11 +29,6 @@ const FilteredCategoryPage = () => {
          toggleSearch={toggleSearch}
          />
       }
-        {/* { contacts && <div id='popups' ref={ref}>
-
-<Contacts ref={contacts_ref} togglePopup={togglePopup}  />
-
- </div>} */}
  
         <div className="w-full box-border min-h-screen">
         <NavBar

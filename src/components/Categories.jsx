@@ -33,9 +33,7 @@ const Categories = () => {
     }
 }
 
-// Usage example
 const deviceType = getDeviceType();
-console.log('Device type:', deviceType);
 deviceType==='Mobile'? options.perPage = 2:options.perPage = 4
   return (
     <div className=" w-full flex justify-center mt-10 lg:mt-2">

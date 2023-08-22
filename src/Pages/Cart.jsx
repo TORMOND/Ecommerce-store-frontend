@@ -6,10 +6,9 @@ import { useContext, useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-
 // components
 import {Footer, NavBar, MpesaModal, Modal, Cancel, Success } from "../components";
-
+import { backend } from "../components/data/url";
 
 const Cart = () => {
 
@@ -29,6 +28,8 @@ const Cart = () => {
       const [isSuccess,setIsSuccess] = useState(false);
       const [isModal, setIsModal ] = useState(false);
       const [canceled, setIsCanceled] = useState(false);
+      const KES = localStorage.getItem('USD_KSH');
+     
       useEffect(() => {
         if (typeof window === 'undefined') {
           return;
@@ -44,20 +45,20 @@ const Cart = () => {
 const checkout=()=>{
           const body ={
             items: cart.items, 
-            // city,postalCode,streetAddress,country,
           }
           const headers ={
             "Content-Type": "application/json"
           }
-          return fetch(`https://besk-merchants.netlify.app/.netlify/functions/api/api/payment/create-payment-intent`,{
+          return fetch(`${backend}/payment/create-payment-intent`, {
             method:"POST",
             headers,
             body:JSON.stringify(body)
           }).then(response=>{
-            console.log(response)
+            return response.json();
           }).then((response) => {
                        if(response.url) {
                            window.location.assign(response.url); // Forwarding user to Stripe
+                           localStorage.setItem('session_id', response.session_id)
                   }}).catch(error=>{
             console.log(error)
           })
@@ -84,8 +85,9 @@ const toggleCancel=()=>{
       {mpesaModal &&
       <MpesaModal
       toggleMpesa={closeMpesa}
-      amount={cart.getTotalCost().toFixed(2)}
+      amount={Math.ceil((cart.getTotalCost().toFixed(2))*KES)}
       items={cart.items}
+      KES={KES}
       />
       }
        {isModal &&
@@ -124,11 +126,10 @@ const toggleCancel=()=>{
             <div className="text-start py-2.5 px-1.5 col-end-3 ">
             <h3>{item.title}</h3>
 
-            <p className='mt-3 font-semibold'>{item.brands}</p>
-            <p className="text-sm">{item.stripeId}</p>
+            <p className='mt-3 font-semibold'>{item.brands}</p>          
          
  <div className="flex flex-col justify-between items-end">
-           <h3 className='text-end'>${item.price}</h3>
+           <h3 className='text-end'>${item.price} || KSH{Math.ceil(item.price*KES*item.quantity)} </h3>
            <div className="flex gap-2 items-center py-2">
             <h3>Quantity:</h3>
           <button disabled={item.quantity===1000} onClick={() => cart.increaseQuantity(item._id)} className="p-2 border w-10">+</button>
@@ -150,7 +151,7 @@ const toggleCancel=()=>{
 
    <div className="flex justify-between items-end">
         <div>Items({productsCount})</div>
-        <h2>Total: ${cart.getTotalCost().toFixed(2)}</h2>
+        <h3>Total: ${cart.getTotalCost().toFixed(2)} || KSH{Math.ceil((cart.getTotalCost().toFixed(2))*KES)} </h3>
     </div>
  <div className="flex flex-col gap-2 mt-4">
                 <input type="text"

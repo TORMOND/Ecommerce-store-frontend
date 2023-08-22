@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import  { useState, useRef } from 'react';
+import  { useState, useRef, useEffect } from 'react';
 import { useLogout } from '../Hooks/useLogout';
 
 
@@ -20,7 +20,17 @@ const Home = () => {
   const ref = useRef(null);
   const brands_ref = useRef(null);
 
-
+  
+useEffect(()=>{
+  
+  fetch('https://api.exchangerate-api.com/v4/latest/USD')
+  .then(response =>{
+      return response.json();
+  }).then(data =>{
+      localStorage.setItem('USD_KSH', data.rates.KES)
+  })
+  
+})
 const signInUser =()=>{
   navigate('/LoginPage')
 }

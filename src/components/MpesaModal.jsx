@@ -6,8 +6,9 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark} from '@fortawesome/free-solid-svg-icons';
 
+import { backend } from './data/url';
 
-const MpesaModal = ({toggleMpesa, amount, items}) => {
+const MpesaModal = ({toggleMpesa, amount, items, KES}) => {
 
   const containerVariants={
     hidden:{
@@ -71,10 +72,10 @@ console.log(itemIds)
 const makepayment =async(amount)=>{
   setLoading(true)
   // amount=1;
-  const response = await fetch('http://localhost:4000/api/mpesaPayment/stk/', {
+  const response = await fetch(`${backend}/mpesaPayment/stk/`, {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({phone, itemIds,items, itemTitles})
+    body: JSON.stringify({phone, itemIds,items, itemTitles, KES})
 })
 
 const json = await response.json()
@@ -120,7 +121,7 @@ if(response.ok){
 
                 <div className='w-full p-2 flex gap-2.5 justify-between items-center border-b border-b-gray-300'>
                    <div className="mx-auto">
-                  <h2>Pay Ksh{Math.ceil(amount*140)}</h2>
+                  <h2>Pay Ksh{amount}</h2>
                 </div>
                     <button onClick={toggleMpesa} className='border border-gray-300 rounded-sm py-1 px-1.5'>
                     <FontAwesomeIcon icon={faXmark} size="lg" />
@@ -140,7 +141,7 @@ if(response.ok){
                 </div>
                 <div className='flex justify-center items-center'>
 
-                <button onClick={()=>makepayment(Math.ceil(amount*140))} 
+                <button onClick={()=>makepayment(amount)} 
               className='before:absolute before:-ml-12  before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-green-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-96 rounded-sm  duration-1000 border-0 transition-all  text-green-500 outline outline-offset-2 outline-green-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-green-400  hover:before:w-80 '>
 {!loading? ' Pay with Mpesa':
  <svg aria-hidden="true" role="status" className="inline w-4 h-4 mr-3 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

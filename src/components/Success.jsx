@@ -1,7 +1,12 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark} from '@fortawesome/free-solid-svg-icons';
+
+import { backend } from './data/url';
+import { useParams } from "react-router-dom";
+
 
 const Success = ({toggleSuccess}) => {
   const containerVariants={
@@ -31,6 +36,37 @@ const boxVariants={
         }
     }
 }
+const { status } = useParams();
+console.log(status)
+
+const id = localStorage.getItem('session_id');
+
+const [data, setData] = useState(null);
+    const [isPending, setPending] = useState(true);
+    const[error, setError] = useState(null)
+
+    useEffect(()=>{
+        fetch(`${backend}/payment/order/success/${id}`)
+        .then((res)=>{
+         if(!res.ok){
+            throw Error('Could not fetch the data ');
+         }
+          return res.json();
+        }).then(data=> {    
+          setData(data);
+          setPending(false)
+          
+        })
+        .catch(error=> {
+          setPending(false)
+          setError(error.message)
+        })
+        console.log(status)
+      }, []);
+console.log(data)
+// localStorage.setItem('purchase', payment)
+
+
   return (
     <motion.div
          variants= {containerVariants}
