@@ -60,7 +60,6 @@
 
 /* LOADING */
 .loading-selected-product{
-  display: flex;
   width: 100%;
   background-color: #fff;
   min-height: 100vh;
@@ -68,11 +67,7 @@
 .loading-image{
   background-color: #ceced1;
   border-radius: 10px;
-  width: 35%;
-  top:0;
-  position: sticky;
   object-fit: cover;
-  height: 95vh;
 }
 .loading-specs{
   margin-top: 50px;

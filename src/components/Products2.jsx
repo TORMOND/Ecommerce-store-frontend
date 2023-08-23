@@ -6,7 +6,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 
 import { useNavigate } from 'react-router-dom';
-import LoadingSection from './LoadingSection';
+import Loading from './Loading';
 
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/default';
@@ -66,11 +66,16 @@ return y
         <div className="w-full box-border md:w-full flex justify-center">
         <div className="bg-gray-100 p-0  lg:p-5 max-w-7xl mx-auto">
 
-               {isPending &&              
-         <LoadingSection />        
+               {isPending &&     
+               <div>         
+            <Loading />
+            <Loading />
+             <Loading />
+              <Loading />
+            </div>
                   }
                {error &&       
-             <LoadingSection />
+        <Loading />
                }
 
 
@@ -113,7 +118,7 @@ return y
             ))
             
             }
-             <h3>Featured on Amazon</h3>
+             <h3 className={`${products? 'inline-block': 'hidden'}`}>Featured on Amazon</h3>
 {products && 
  <div className="grid  gap-2.5 grid-cols-2  lg:grid-cols-4">
               

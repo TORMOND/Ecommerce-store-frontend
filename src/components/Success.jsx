@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,  useContext} from 'react';
+import { OrdersContext } from "../Context/OrdersContext";
+
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark} from '@fortawesome/free-solid-svg-icons';
@@ -37,11 +39,13 @@ const boxVariants={
     }
 }
 const { status } = useParams();
+
 console.log(status)
 
-const id = localStorage.getItem('session_id');
+const orders= useContext(OrdersContext);
+const id = orders.items.length-1;
 
-const [data, setData] = useState(null);
+    const [data, setData] = useState(null);
     const [isPending, setPending] = useState(true);
     const[error, setError] = useState(null)
 
@@ -55,7 +59,6 @@ const [data, setData] = useState(null);
         }).then(data=> {    
           setData(data);
           setPending(false)
-          
         })
         .catch(error=> {
           setPending(false)
@@ -63,8 +66,9 @@ const [data, setData] = useState(null);
         })
         console.log(status)
       }, []);
+
 console.log(data)
-// localStorage.setItem('purchase', payment)
+
 
 
   return (

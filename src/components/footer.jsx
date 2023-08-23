@@ -85,12 +85,12 @@ const Footer = () => {
             </div>
        <div className="w-full flex flex-col md:flex-row justify-between p-4 max-w-7xl mt-[240px] md:mt-2  mx-auto items-center">
             <h4>@ Copyright:2023 BESK MERCHANTS </h4>
-            <div className="flex gap-2.5 font-semibold text-gray-500 items-center">
+            <div className="flex flex-col md:flex-row gap-2.5 font-semibold text-gray-500 items-center">
                 <p>Privacy Policy | Terms & Conditions </p>
-                <div className='flex flex-col md:flex-row gap-2 items-center'>
+                <div className='flex gap-2 items-center'>
                     <img src={mastercard} alt={mastercard} />
-                    <img src={visacard} alt={visacard} className='h-20' />
-                    <img src={MPESA} alt={MPESA} className='h-8' />
+                    <img src={visacard} alt={visacard} className='h-16 md:h-20' />
+                    <img src={MPESA} alt={MPESA} className='h-6 md:h-8' />
                 </div>
             </div>
             </div>     

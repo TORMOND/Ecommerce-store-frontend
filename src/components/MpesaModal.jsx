@@ -42,6 +42,10 @@ const [phone, setCustomerPhone] = useState('');
 const [loading, setLoading]= useState(false);
 const [error, setError]= useState(false)
 const [success, setSuccess] = useState(false);
+const [city,setCity] = useState('');
+const [postalCode,setPostalCode] = useState('');
+const [streetAddress,setStreetAddress] = useState('');
+const [country,setCountry] = useState('');
 
 console.log(items)
 let categories = [] 
@@ -69,26 +73,24 @@ const findProducts =(products)=>{
 const itemTitles = items? findProducts(items): []
 
 console.log(itemIds)
-const makepayment =async(amount)=>{
+const makepayment =async()=>{
   setLoading(true)
-  // amount=1;
   const response = await fetch(`${backend}/mpesaPayment/stk/`, {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({phone, itemIds,items, itemTitles, KES})
 })
 
-const json = await response.json()
+// const json = await response.json()
 if(!response.ok){
     setLoading(false)
     setError(true)
-    console.log(json)
 }
 if(response.ok){
   setLoading(false)
   setError(false)
   setSuccess(true)
-  console.log(json)
+
 }
 }
 
@@ -127,8 +129,42 @@ if(response.ok){
                     <FontAwesomeIcon icon={faXmark} size="lg" />
                     </button>
                 </div>
-               
-                <div  className=' text-start px-2 flex flex-col  gap-1.5 items-center w-full py-5  justify-center'>
+                <div className="flex flex-col gap-2 mt-4 px-2">
+                  <h4>Fill in the following details:</h4>
+                <input type="text"
+                       placeholder="City"
+                       value={city}
+                       name="city"
+                       onChange={ev => setCity(ev.target.value)}
+                       className="outline outline-gray-400 p-2 max-w-4xl"
+                       required 
+                       />
+                <input type="text"
+                       placeholder="Postal Code"
+                       value={postalCode}
+                       name="postalCode"
+                       onChange={ev => setPostalCode(ev.target.value)}
+                       className="outline outline-gray-400 p-2"
+                       required 
+                       />
+              <input type="text"
+                     placeholder="Street Address"
+                     value={streetAddress}
+                     name="streetAddress"
+                     onChange={ev => setStreetAddress(ev.target.value)}
+                     className="outline outline-gray-400 p-2"
+                     required 
+                     />
+              <input type="text"
+                     placeholder="Country"
+                     value={country}
+                     name="country"
+                     onChange={ev => setCountry(ev.target.value)}
+                     className="outline outline-gray-400 p-2"
+                     required 
+                     />
+ </div>
+                <div  className='text-start px-2 flex flex-col  gap-1.5 items-center w-full py-5  justify-center'>
                     <p className='text-start w-full'>Enter Phone Number:</p>
                     <input 
                     type='text' 

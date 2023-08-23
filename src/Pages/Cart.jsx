@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from "../Context/CartContext";
 import { useContext, useState, useEffect } from "react";
+import { OrdersContext } from "../Context/OrdersContext";
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,15 +22,11 @@ const Cart = () => {
       const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
       console.log(cart.items)
       const [mpesaModal, setMpesaModal] = useState(false)
-      const [city,setCity] = useState('');
-      const [postalCode,setPostalCode] = useState('');
-      const [streetAddress,setStreetAddress] = useState('');
-      const [country,setCountry] = useState('');
       const [isSuccess,setIsSuccess] = useState(false);
       const [isModal, setIsModal ] = useState(false);
       const [canceled, setIsCanceled] = useState(false);
       const KES = localStorage.getItem('USD_KSH');
-     
+      const orders= useContext(OrdersContext);
       useEffect(() => {
         if (typeof window === 'undefined') {
           return;
@@ -58,7 +55,7 @@ const checkout=()=>{
           }).then((response) => {
                        if(response.url) {
                            window.location.assign(response.url); // Forwarding user to Stripe
-                           localStorage.setItem('session_id', response.session_id)
+                           orders.setorders(response.session_id)
                   }}).catch(error=>{
             console.log(error)
           })
@@ -148,41 +145,21 @@ const toggleCancel=()=>{
         
   </div>
    <div className="bg-white p-2.5 mt-5 rounded-md top-20 sticky h-80">
+   {cart.items && cart.items.map((item, index)=>(
+          <div className="flex justify-between gap-2.5 p-2.5 border border-b-gray-300" key={index}>
 
-   <div className="flex justify-between items-end">
+            <h6>{item.title}</h6>
+
+           <h6 className='text-end'>${item.price*item.quantity} || KSH{Math.ceil(item.price*KES*item.quantity)} </h6>
+
+            </div>
+        ))}
+
+   <div className="flex justify-between items-end my-2">
         <div>Items({productsCount})</div>
         <h3>Total: ${cart.getTotalCost().toFixed(2)} || KSH{Math.ceil((cart.getTotalCost().toFixed(2))*KES)} </h3>
     </div>
- <div className="flex flex-col gap-2 mt-4">
-                <input type="text"
-                       placeholder="City"
-                       value={city}
-                       name="city"
-                       onChange={ev => setCity(ev.target.value)}
-                       className="outline outline-gray-400 p-2"
-                       />
-                <input type="text"
-                       placeholder="Postal Code"
-                       value={postalCode}
-                       name="postalCode"
-                       onChange={ev => setPostalCode(ev.target.value)}
-                       className="outline outline-gray-400 p-2"
-                       />
-              <input type="text"
-                     placeholder="Street Address"
-                     value={streetAddress}
-                     name="streetAddress"
-                     onChange={ev => setStreetAddress(ev.target.value)}
-                     className="outline outline-gray-400 p-2"
-                     />
-              <input type="text"
-                     placeholder="Country"
-                     value={country}
-                     name="country"
-                     onChange={ev => setCountry(ev.target.value)}
-                     className="outline outline-gray-400 p-2"
-                     />
- </div>
+
  <div className='flex gap-2.5 flex-row'>
    <button
      className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000 

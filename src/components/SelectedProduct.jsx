@@ -1,6 +1,7 @@
 import useFetch from '../UseFetch';
 import { CartContext } from "../Context/CartContext";
 import { useContext, useState, useEffect } from "react";
+import { OrdersContext } from "../Context/OrdersContext";
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,11 +15,6 @@ import { backend } from './data/url';
 const SelectedProduct = () => {
   const id = localStorage.getItem('id');
   const KES = localStorage.getItem('USD_KSH');
-    const [city,setCity] = useState('');
-    const [postalCode,setPostalCode] = useState('');
-    const [streetAddress,setStreetAddress] = useState('');
-    const [country,setCountry] = useState('');
-
 
   const [canceled, setIsCanceled] = useState(false)
   useEffect(() => {
@@ -35,6 +31,7 @@ const SelectedProduct = () => {
   }, []);
    const {data:product, isPending, error} = useFetch(`${backend}/products/${id}`);
    const [isSuccess,setIsSuccess] = useState(false);
+   const orders= useContext(OrdersContext);
    let [quantity, setQuantity] = useState(1);
    
    const incrementQuantity=()=>{
@@ -51,8 +48,6 @@ const SelectedProduct = () => {
     price:product.price,
     name:product.title
   }
-  const purchasedProduct = body;
-  localStorage.setItem('purchase', purchasedProduct)
   const headers ={
     "Content-Type": "application/json"
   }
@@ -65,7 +60,7 @@ const SelectedProduct = () => {
 }).then((response) => {
     if(response.url) {
         window.location.assign(response.url); // Forwarding user to Stripe
-        localStorage.setItem('session_id', response.session_id) 
+        orders.setorders(response.session_id)
     }
   
 }).catch(error=>{
@@ -73,10 +68,10 @@ const SelectedProduct = () => {
   })
  }
  const item = [];
- let prod ={...product, quantity,
-  city,postalCode,streetAddress,country,}
+ let prod ={...product, quantity}
  product? item.push(prod) : []
  const cart = useContext(CartContext);
+
  const [mpesaModal, setMpesaModal] = useState(false)
  const mpesaPay=()=>{
   setMpesaModal(true)
@@ -113,12 +108,12 @@ const SelectedProduct = () => {
       }
      <div className="min-h-[80vh] flex flex-col">
 {isPending &&
- <div className='w-screen box-border'>
+ <div className='w-full box-border'>
         <div className="loading-selected-product flex flex-col lg:flex-row ">
-        <div className="loading-image animate-pulse ">
+        <div className="loading-image animate-pulse w-full lg:w-1/4 h-1/4 lg:h-[90vh]">
 
 </div>
- <div className="loading-infor animate-pulse ">
+ <div className="loading-infor animate-pulse  w-full lg:w-1/2">
 <div className="loading-title animate-pulse "></div>
 <p className="loading-brand animate-pulse "></p>
 <div className="loading-rating animate-pulse "></div>
@@ -129,7 +124,7 @@ const SelectedProduct = () => {
   </ul>
 </div>
  </div>
- <div className="loading-actions animate-pulse ">
+ <div className="loading-actions animate-pulse  w-full lg:w-1/4">
   <div className="loading-price animate-pulse "></div>
   <div className="loading-extra-fees animate-pulse "></div>
   <div className="loading-delivery-period animate-pulse "></div>
@@ -237,40 +232,7 @@ const SelectedProduct = () => {
           <button onClick={decrementQuantity} disabled={quantity===1} className="p-2 border w-10">-</button>
 
           </div>
-          <div className="flex flex-col gap-2 mt-4">
-                <input type="text"
-                       placeholder="City"
-                       value={city}
-                       name="city"
-                       onChange={ev => setCity(ev.target.value)}
-                       className="outline outline-gray-400 p-2"
-                       required 
-                       />
-                <input type="text"
-                       placeholder="Postal Code"
-                       value={postalCode}
-                       name="postalCode"
-                       onChange={ev => setPostalCode(ev.target.value)}
-                       className="outline outline-gray-400 p-2"
-                       required 
-                       />
-              <input type="text"
-                     placeholder="Street Address"
-                     value={streetAddress}
-                     name="streetAddress"
-                     onChange={ev => setStreetAddress(ev.target.value)}
-                     className="outline outline-gray-400 p-2"
-                     required 
-                     />
-              <input type="text"
-                     placeholder="Country"
-                     value={country}
-                     name="country"
-                     onChange={ev => setCountry(ev.target.value)}
-                     className="outline outline-gray-400 p-2"
-                     required 
-                     />
- </div>
+ 
    <button onClick={()=>cart.addOneToCart(product)} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative    cursor-pointer p-2 flex justify-center w-full rounded-sm  duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '
    >

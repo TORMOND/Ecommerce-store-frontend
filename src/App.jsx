@@ -7,8 +7,9 @@ import LoginPage from './Pages/LoginPage';
 import SignUpPage from './Pages/SignupPage';
 import Cart from './Pages/Cart';
 import FilteredCategoryPage from './Pages/FilteredCategories';
-
+import ForgotPassword from './Pages/ForgotPassword';
 import Contacts from './Pages/Contacts';
+import OrdersPage from './Pages/OrdersPage';
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
     <Route path='/' element={<Home />}></Route>
     <Route path='/LoginPage' element={<LoginPage />}></Route>
     <Route path='/SignupPage' element={<SignUpPage />}></Route>
+    <Route path='/Orders' element={<OrdersPage />} ></Route>
+    <Route path='/ForgotPassword' element={<ForgotPassword />} ></Route>
     <Route path='/cart' element={<Cart/>}></Route>
     <Route path='/contactUs' element={<Contacts/>}></Route>
     <Route path='/ProductPage/:id' element={<ProductPage/>}></Route>
