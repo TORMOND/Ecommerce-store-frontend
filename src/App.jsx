@@ -10,6 +10,7 @@ import FilteredCategoryPage from './Pages/FilteredCategories';
 import ForgotPassword from './Pages/ForgotPassword';
 import Contacts from './Pages/Contacts';
 import OrdersPage from './Pages/OrdersPage';
+import ProfilePage from './Pages/ProfilePage';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
     <Route path='/Orders' element={<OrdersPage />} ></Route>
     <Route path='/ForgotPassword' element={<ForgotPassword />} ></Route>
     <Route path='/cart' element={<Cart/>}></Route>
+    <Route path='/Profile' element={<ProfilePage />}></Route>
     <Route path='/contactUs' element={<Contacts/>}></Route>
     <Route path='/ProductPage/:id' element={<ProductPage/>}></Route>
     <Route path='/Category/:categoryName' element={<FilteredCategoryPage />}></Route>

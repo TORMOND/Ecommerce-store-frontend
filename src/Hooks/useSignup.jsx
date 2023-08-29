@@ -16,7 +16,7 @@ export const useSignUp = ()=>{
         const response = await fetch(`${backend}/user/signup`, {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({email, password, firstName, secondName})
+            body: JSON.stringify({email, password, firstName, secondName, profile:null, role:'client'})
         })
 
         const json = await response.json()

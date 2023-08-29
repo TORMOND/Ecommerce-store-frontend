@@ -46,11 +46,12 @@ const [city,setCity] = useState('');
 const [postalCode,setPostalCode] = useState('');
 const [streetAddress,setStreetAddress] = useState('');
 const [country,setCountry] = useState('');
+// const [itemIds, setItemIds] = useState([])
 
 console.log(items)
 let categories = [] 
-const findCategories =(products)=>{
 
+const findCategories =(products)=>{
 for(let i =0; i< products.length; i++){
    categories.push(products[i]._id)
 }
@@ -59,7 +60,7 @@ return y
 }
 
 
-const itemIds = items? findCategories(items): []
+const itemIds = findCategories(items)
 
 let prods = []
 const findProducts =(products)=>{
@@ -69,16 +70,16 @@ const findProducts =(products)=>{
  const newProducts = Array.from(new Set(categories))
  return newProducts
 }
-
 const itemTitles = items? findProducts(items): []
 
-console.log(itemIds)
+
 const makepayment =async()=>{
   setLoading(true)
+console.log(itemIds)
   const response = await fetch(`${backend}/mpesaPayment/stk/`, {
     method: 'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({phone, itemIds,items, itemTitles, KES})
+    body: JSON.stringify({phone, itemIds, items, itemTitles, KES, amount:2})
 })
 
 // const json = await response.json()

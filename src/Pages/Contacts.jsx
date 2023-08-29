@@ -126,7 +126,7 @@ const Contacts = () => {
               className='bg-tertiary py-4 px-6 placeholder:text-secondary  rounded-lg outline-none border-none font-medium'
             />
           </label>
-
+{error && <div className="text-red-500 font-bold ">Error:Unable to send feedback, try again</div>}
           <button
             type='submit'
             className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
@@ -140,7 +140,7 @@ const Contacts = () => {
  Sending ...
  </div>
 }
-            {error && <div className="text-red-500 font-bold ">Error:Unable to send feedback, try again</div>}
+            
           </button>
         </form>
       </motion.div>

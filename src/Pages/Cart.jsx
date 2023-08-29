@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { CartContext } from "../Context/CartContext";
 import { useContext, useState, useEffect } from "react";
 import { OrdersContext } from "../Context/OrdersContext";
+import { useAuthContext } from '../Hooks/useAuthContext';
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +18,9 @@ const Cart = () => {
     const signInUser =()=>{
         navigate('/LoginPage')
       }
- 
+      const {user} = useAuthContext();
+      
+
       const cart = useContext(CartContext);
       const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0);
       console.log(cart.items)
@@ -41,7 +44,8 @@ const Cart = () => {
       }, []);
 const checkout=()=>{
           const body ={
-            items: cart.items, 
+            items: cart.items,
+            // user:user.user._id 
           }
           const headers ={
             "Content-Type": "application/json"
@@ -60,6 +64,10 @@ const checkout=()=>{
             console.log(error)
           })
         }
+        // const validateUser=()=>{
+        //   if(!user) return signInUser()
+        //    checkout()
+        // }
 const mpesaPay=()=>{
 setMpesaModal(true)
 }
@@ -108,7 +116,7 @@ const toggleCancel=()=>{
  toggleSearch={toggleSearch}
  />
 <div className="w-full box-border flex bg-gray-100">
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 mt-10 max-w-7xl mx-auto">
+<div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 mt-10 max-w-8xl mx-auto">
 
   <div className="bg-white rounded-md p-2.5 col-start-1 col-end-3  ">
     <div className="p-2.5 border border-b-gray-300 text-start font-bold">
@@ -128,7 +136,7 @@ const toggleCancel=()=>{
  <div className="flex flex-col justify-between items-end">
            <h3 className='text-end'>${item.price} || KSH{Math.ceil(item.price*KES*item.quantity)} </h3>
            <div className="flex gap-2 items-center py-2">
-            <h3>Quantity:</h3>
+            <h5>Quantity:</h5>
           <button disabled={item.quantity===1000} onClick={() => cart.increaseQuantity(item._id)} className="p-2 border w-10">+</button>
           <div className="text-lg">{item.quantity}</div>
           <button onClick={() => cart.removeOneFromCart(item._id)} disabled={item.quantity===1} className="p-2 border w-10">-</button>
@@ -144,7 +152,7 @@ const toggleCancel=()=>{
         
         
   </div>
-   <div className="bg-white p-2.5 mt-5 rounded-md top-20 sticky h-80">
+   <div className="bg-white p-2.5 mt-5 rounded-md top-20 sticky h-80 lg:min-w-[350px]">
    {cart.items && cart.items.map((item, index)=>(
           <div className="flex justify-between gap-2.5 p-2.5 border border-b-gray-300" key={index}>
 
@@ -155,12 +163,12 @@ const toggleCancel=()=>{
             </div>
         ))}
 
-   <div className="flex justify-between items-end my-2">
+   <div className="flex justify-between items-end my-2 gap-4">
         <div>Items({productsCount})</div>
         <h3>Total: ${cart.getTotalCost().toFixed(2)} || KSH{Math.ceil((cart.getTotalCost().toFixed(2))*KES)} </h3>
     </div>
 
- <div className='flex gap-2.5 flex-row'>
+ <div className='flex gap-4 flex-row'>
    <button
      className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000 
       overflow-hidden relative mt-5 mx-auto cursor-pointer p-2 flex justify-center w-[80%] rounded-sm 
@@ -174,7 +182,7 @@ const toggleCancel=()=>{
       <button onClick={mpesaPay} 
    className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full
     before:bg-green-500 before:skew-x-45 before:z-[-1] before:duration-1000  overflow-hidden relative 
-    mt-5 mx-auto cursor-pointer p-2 flex justify-center w-[80%] rounded-sm  duration-1000 border-0 transition-all  text-green-500 outline outline-offset-2 outline-green-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-green-400  hover:before:w-80 '
+    mt-5 mx-auto cursor-pointer p-2 flex justify-center w-[80%] rounded-sm  duration-1000 border-0 transition-all  text-green-500 outline outline-offset-2 outline-green-500 box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-green-400  hover:before:w-80 max-h-24 '
    >
     Pay with Mpesa
    </button>

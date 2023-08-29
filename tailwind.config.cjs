@@ -11,6 +11,9 @@ module.exports = {
       },
       scale: {
         '110': '1.1',
+      }, 
+       maxWidth: {
+        '8xl': '1400px',
       }
     },
   },

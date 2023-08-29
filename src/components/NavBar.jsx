@@ -35,12 +35,16 @@ const signInUser =()=>{
 const homePage = ()=>{
   navigate('/')
 }
+const profilePage=()=>{
+  navigate('/Profile')
+}
+const ordersPage=()=>{
+  navigate('/Orders')
+}
 const handleLogout =()=>{
-  logout();
+  logout;
 }
-const searchProduct =() =>{
- 
-}
+
 const userProfile = () =>{
   setUserBar(!userBar)
 }
@@ -60,9 +64,16 @@ const userProfile = () =>{
          <FontAwesomeIcon icon={faRightToBracket} size="lg" />
             <p className="text-sm">Logout</p>
       </button>
-      <button className="cursor-pointer p-1 duration-75 bg-purple-500 rounded-md  outline-1 outline-purple-500 flex gap-1 items-center px-4 py-2 text-white" onClick={signInUser}>
+
+          <button className="cursor-pointer p-1 duration-75 bg-purple-500 rounded-md  outline-1 outline-purple-500 flex gap-1 items-center px-4 py-2 text-white"
+           onClick={profilePage}>
           <FontAwesomeIcon icon={faUser} className='my-0 mx-1.5' />
-            <span className="text-xs">Login Page</span>
+            <span className="text-xs">Profile</span>
+          </button>
+            <button className="cursor-pointer p-1 duration-75 bg-purple-500 rounded-md  outline-1 outline-purple-500 flex gap-1 items-center px-4 py-2 text-white"
+           onClick={ordersPage}>
+          {/* <FontAwesomeIcon icon={faUser} className='my-0 mx-1.5' /> */}
+            <span className="text-xs">Orders</span>
           </button>
           </div>
           
@@ -84,7 +95,7 @@ const userProfile = () =>{
         </div>
           </div>
           {
-            !user &&
+            user==null &&
              <div className="cursor-pointer p-1 duration-75 hover:text-purple-200 outline-1 outline-purple-500">
           <FontAwesomeIcon icon={faUser} className='my-0 mx-1.5' />
           <FontAwesomeIcon icon={faCaretDown}  className='my-0 mx-1.5' onClick={userProfile}   />
@@ -93,10 +104,12 @@ const userProfile = () =>{
          
           {user &&
           <div className="flex gap-2.5 px-4 py-2 items-center">
-           <div className="cursor-pointer p-1 duration-75 hover:text-purple-500 outline-1 outline-purple-500" >
+           <div className="cursor-pointer p-1 duration-75 hover:text-purple-500 outline-1 outline-purple-500" 
+            onClick={userProfile}
+           >
           <FontAwesomeIcon icon={faUser} className='my-0 mx-1.5' />
             <span>{user.user.firstName}</span>
-            <FontAwesomeIcon icon={faCaretDown}  className='my-0 mx-1.5' onClick={userProfile}  />
+            <FontAwesomeIcon icon={faCaretDown}  className='my-0 mx-1.5'  />
           </div>
 
 
