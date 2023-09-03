@@ -5,12 +5,13 @@ import { OrdersContext } from "../Context/OrdersContext";
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping,faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 
 import MpesaModal from './MpesaModal';
 import Cancel from "./Cancel";
 import Success from './Success';
 import { backend } from './data/url';
+import CommentsSection from './CommentsSection';
 
 const SelectedProduct = () => {
   const id = localStorage.getItem('id');
@@ -181,6 +182,14 @@ const SelectedProduct = () => {
 <p className='product-brand'>Brand:{product.brands}</p>
 
 <h3 className='product-price'>${product.price} || KSH{Math.ceil(product.price*KES)}</h3>
+<div className="rating">
+                  <FontAwesomeIcon icon={ faStar} className='ratings' />
+                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
+                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
+                  <FontAwesomeIcon icon={ faStar} className='ratings'  />
+                  <FontAwesomeIcon icon={faStarHalfStroke} className='ratings'  />
+                  {/* <p>123</p> */}
+                  </div>
 
 {/* {product.color &&
 <ul className='my-2'>
@@ -222,7 +231,6 @@ const SelectedProduct = () => {
 <div className="w-full lg:w-2/5 top-36 lg:sticky mt-5 rounded-sm border border-gray-300 flex flex-col gap-5 p-4 text-start ">
 <h3 className='product-price'>${product.price*quantity} || KSH{Math.ceil(product.price*KES*quantity)}</h3>
  
-{/* <p className='text-xs'>{product.stripeId}</p> */}
 
 <div className="flex flex-col gap-5 py-2.5 px-4 ">
 <div className="flex gap-2 item-center">
@@ -258,6 +266,7 @@ const SelectedProduct = () => {
   </div>
 
 }    </div>
+<CommentsSection />
         </div>
      );
 }

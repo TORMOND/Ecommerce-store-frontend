@@ -14,7 +14,7 @@ const ProductPage = () => {
 
     
     useEffect(() => {
-     
+      window.scrollTo(0, 0);
     }, []);
   
    

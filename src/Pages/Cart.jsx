@@ -31,6 +31,7 @@ const Cart = () => {
       const KES = localStorage.getItem('USD_KSH');
       const orders= useContext(OrdersContext);
       useEffect(() => {
+
         if (typeof window === 'undefined') {
           return;
         }
@@ -41,6 +42,7 @@ const Cart = () => {
         if (window?.location.href.includes('canceled')) {
           setIsCanceled(true);
         }
+        window.scrollTo(0, 0);
       }, []);
 const checkout=()=>{
           const body ={
@@ -64,10 +66,10 @@ const checkout=()=>{
             console.log(error)
           })
         }
-        // const validateUser=()=>{
-        //   if(!user) return signInUser()
-        //    checkout()
-        // }
+        const validateUser=()=>{
+          if(user==null) return signInUser()
+           checkout()
+        }
 const mpesaPay=()=>{
 setMpesaModal(true)
 }
@@ -105,6 +107,7 @@ const toggleCancel=()=>{
      toggleSuccess={toggleSuccess}
            />
       }
+   
       {canceled &&
       <Cancel
       toggleCancel={toggleCancel}
@@ -174,7 +177,7 @@ const toggleCancel=()=>{
       overflow-hidden relative mt-5 mx-auto cursor-pointer p-2 flex justify-center w-[80%] rounded-sm 
        duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500
         box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '
-     onClick={checkout}
+     onClick={()=>validateUser()}
      >
       Checkout with Card
       </button>
@@ -186,6 +189,28 @@ const toggleCancel=()=>{
    >
     Pay with Mpesa
    </button>
+
+   {
+        <div className='fixed z-20 ml-[1%] mt-[10%] bg-white shadow-lg shadow-purple-500 rounded-md max-w-2xl p-4'>
+          <div className='flex flex-col gap-2.5'>
+            <h3 className=''>Sign In to Proceed</h3>
+          <p className=''>We recommend for you to sign in in order for us to save your orders for you to review them later.
+          You can choose to skip and we will still complete your order.
+          </p>
+
+          </div>
+          <div className='mt-4 flex justify-start gap-5'>
+            <button  className='before:absolute before:-ml-12 before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000 
+      overflow-hidden relative mt-5  cursor-pointer p-2 flex justify-center w-[45%] lg:w-[40%] rounded-sm 
+       duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500
+        box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '>Sign In</button>
+            <button  className='before:absolute before:-ml-12  before:transition-[width] before:top-0 before:w-0 before:h-full before:bg-purple-500 before:skew-x-45 before:z-[-1] before:duration-1000 
+      overflow-hidden relative mt-5  cursor-pointer p-2 flex justify-center w-[45%] lg:w-[40%] rounded-sm 
+       duration-1000 border-0 transition-all  text-purple-500 outline outline-offset-2 outline-purple-500
+        box-border hover:text-white hover:scale-110 hover:shadow-lg hover:shadow-purple-400  hover:before:w-80 '>Skip & Proceed</button>
+          </div>
+        </div>
+      }
  </div>
    
 

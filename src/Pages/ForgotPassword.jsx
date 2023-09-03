@@ -48,7 +48,7 @@ const ForgotPassword = () => {
         setError(true)
       }
       setLoading(false)
-      navigate('/LoginPage')
+      navigate('/LoginPage') 
       // Handle response, e.g., show success message
     };
   
